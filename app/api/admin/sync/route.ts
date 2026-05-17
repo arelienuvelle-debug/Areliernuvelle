@@ -3,13 +3,16 @@ import Stripe from "stripe";
 import { appendOrder, Order } from "@/lib/orders";
 import { isValidToken, ADMIN_COOKIE } from "@/lib/admin-auth";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 export async function POST(req: NextRequest) {
   const token = req.cookies.get(ADMIN_COOKIE)?.value;
   if (!isValidToken(token)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return NextResponse.json({ synced: 0, error: "Stripe not configured" });
+  }
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
   const sessions = await stripe.checkout.sessions.list({
     limit: 100,
