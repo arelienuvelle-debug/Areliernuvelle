@@ -18,6 +18,86 @@ function formatDate(iso: string) {
   });
 }
 
+function buildSlipHTML(orders: Order[]): string {
+  const slips = orders
+    .map(
+      (order, i) => `
+    <div class="slip${i < orders.length - 1 ? " break" : ""}">
+      <div class="header">
+        <div class="brand">ATELIER NUVELLÉ</div>
+        <div class="sub">Packing Slip</div>
+      </div>
+      <div class="meta">
+        <div><div class="lbl">Order ref</div><div class="val">${order.id.slice(-10).toUpperCase()}</div></div>
+        <div><div class="lbl">Date</div><div class="val">${formatDate(order.createdAt)}</div></div>
+        <div><div class="lbl">Shipping</div><div class="val">${order.shippingMethod}</div></div>
+      </div>
+      <div class="section">
+        <div class="lbl">Ship to</div>
+        <div class="val bold">${order.customerName}</div>
+        <div class="val">${order.address}</div>
+        <div class="val">${order.city}${order.postalCode ? ", " + order.postalCode : ""}</div>
+        <div class="val">${order.country}</div>
+        <div class="val muted">${order.customerEmail}</div>
+      </div>
+      <table>
+        <thead><tr><th>Item</th><th>Qty</th><th style="text-align:right">Price</th></tr></thead>
+        <tbody>
+          ${order.items
+            .map(
+              (item) =>
+                `<tr><td>${item.name}</td><td>${item.quantity}</td><td style="text-align:right">${pence(item.unitAmount * item.quantity)}</td></tr>`
+            )
+            .join("")}
+        </tbody>
+      </table>
+      <div class="totals">
+        <div class="row"><span>Subtotal</span><span>${pence(order.subtotal)}</span></div>
+        <div class="row"><span>Shipping</span><span>${order.shippingAmount === 0 ? "Free" : pence(order.shippingAmount)}</span></div>
+        <div class="row bold"><span>Total</span><span>${pence(order.total)}</span></div>
+      </div>
+      <div class="footer">Thank you for your order.</div>
+    </div>`
+    )
+    .join("");
+
+  return `<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>Packing Slips — Atelier Nuvellé</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;font-size:12px;color:#1a1a1a;background:#fff}
+.slip{padding:48px;max-width:640px;margin:0 auto}
+.break{page-break-after:always}
+.header{text-align:center;border-bottom:2px solid #1a1a1a;padding-bottom:18px;margin-bottom:22px}
+.brand{font-size:20px;letter-spacing:.35em;font-weight:normal}
+.sub{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:#888;margin-top:5px}
+.meta{display:flex;gap:32px;margin-bottom:22px}
+.lbl{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:3px}
+.val{font-size:12px;line-height:1.5}
+.bold{font-weight:bold}
+.muted{color:#777}
+.section{border-top:1px solid #e8e8e8;padding-top:18px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;margin-bottom:16px}
+th{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#999;padding:5px 0;border-bottom:1px solid #e0e0e0;text-align:left}
+td{padding:7px 0;border-bottom:1px solid #f0f0f0}
+.totals{border-top:1px solid #1a1a1a;padding-top:12px}
+.row{display:flex;justify-content:space-between;margin-bottom:5px;font-size:12px}
+.row.bold{font-weight:bold;font-size:13px;border-top:1px solid #ddd;padding-top:8px;margin-top:4px}
+.footer{text-align:center;font-size:10px;color:#aaa;letter-spacing:.1em;margin-top:32px;padding-top:18px;border-top:1px solid #f0f0f0}
+@media print{body{padding:0}.slip{padding:32px}}
+</style>
+</head><body>${slips}</body></html>`;
+}
+
+function printSlips(orders: Order[]) {
+  const win = window.open("", "_blank");
+  if (!win) return;
+  win.document.write(buildSlipHTML(orders));
+  win.document.close();
+  win.focus();
+  setTimeout(() => win.print(), 400);
+}
+
 function StatCard({
   label,
   value,
@@ -124,6 +204,18 @@ export default function AdminDashboard({
           </h1>
         </div>
         <div className="flex items-center gap-4">
+          {orders.length > 0 && (
+            <button
+              onClick={() => printSlips(orders)}
+              className="text-xs tracking-widest uppercase px-4 py-2 border transition-colors"
+              style={{
+                borderColor: "rgba(201,169,110,0.4)",
+                color: "var(--color-gold)",
+              }}
+            >
+              Print All Slips
+            </button>
+          )}
           <button
             onClick={handleSync}
             disabled={syncing}
@@ -412,6 +504,18 @@ export default function AdminDashboard({
                             >
                               {order.id}
                             </p>
+                          </div>
+                          <div className="mt-6">
+                            <button
+                              onClick={() => printSlips([order])}
+                              className="text-xs tracking-widest uppercase px-4 py-2 border transition-colors"
+                              style={{
+                                borderColor: "rgba(201,169,110,0.4)",
+                                color: "var(--color-gold)",
+                              }}
+                            >
+                              Print Packing Slip
+                            </button>
                           </div>
                         </div>
                       </div>
