@@ -55,6 +55,7 @@ create-next-zip.js
 create-presentation.js
 generate_bottles.py
 polish-images.js
+push-server-files.js
 watchdog.sh
 server-files/
 *.zip

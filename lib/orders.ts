@@ -38,15 +38,20 @@ export function readOrders(): Order[] {
   }
 }
 
-// Returns true if order was newly added, false if it already existed.
+// Returns true if order was newly added, false if it already existed or write failed.
 export function appendOrder(order: Order): boolean {
   const orders = readOrders();
   if (orders.some((o) => o.id === order.id)) return false;
   orders.unshift(order);
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  // Write to a tmp file then rename for atomic replace — prevents partial writes.
-  const tmp = ORDERS_FILE + ".tmp";
-  fs.writeFileSync(tmp, JSON.stringify(orders, null, 2), "utf-8");
-  fs.renameSync(tmp, ORDERS_FILE);
-  return true;
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    // Write to a tmp file then rename for atomic replace — prevents partial writes.
+    const tmp = ORDERS_FILE + ".tmp";
+    fs.writeFileSync(tmp, JSON.stringify(orders, null, 2), "utf-8");
+    fs.renameSync(tmp, ORDERS_FILE);
+    return true;
+  } catch {
+    // Read-only filesystem (Vercel serverless) — Stripe is source of truth.
+    return false;
+  }
 }
