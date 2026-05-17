@@ -39,3 +39,26 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Hostinger deployment scripts (contain SSH credentials — local only)
+full-deploy.js
+deploy-next.js
+ssh-deploy.js
+upload-server-files.js
+fix-live.js
+fix-phpproxy.js
+fix-proxy.js
+fix-server.js
+fix-socket.js
+create-deploy-zip.js
+create-next-zip.js
+create-presentation.js
+generate_bottles.py
+polish-images.js
+watchdog.sh
+server-files/
+*.zip
+
+# Local data files
+orders.json
+orders.json.tmp
