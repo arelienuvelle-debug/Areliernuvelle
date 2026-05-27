@@ -46,11 +46,11 @@ export default function NewsletterSection() {
 
           <h2
             className="font-display font-light mb-4"
-            style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", color: "var(--color-ivory)" }}
+            style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", color: "var(--color-text-primary)" }}
           >
             Be the first to know.
           </h2>
-          <p className="text-sm tracking-wider mb-10" style={{ color: "rgba(245,240,232,0.45)" }}>
+          <p className="text-sm tracking-wider mb-10" style={{ color: "var(--color-text-secondary)" }}>
             New compositions, exclusive launches, and private previews — delivered quietly.
           </p>
         </motion.div>
@@ -106,7 +106,7 @@ export default function NewsletterSection() {
                 style={{
                   border: "1px solid rgba(201,169,110,0.22)",
                   borderRight: "none",
-                  color: "var(--color-ivory)",
+                  color: "var(--color-text-primary)",
                 }}
                 onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.6)")}
                 onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.22)")}
@@ -157,7 +157,7 @@ export default function NewsletterSection() {
 
         <motion.p
           className="text-xs mt-5 tracking-wider"
-          style={{ color: "rgba(245,240,232,0.25)" }}
+          style={{ color: "rgba(26,26,26,0.35)" }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

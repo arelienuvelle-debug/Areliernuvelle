@@ -19,11 +19,11 @@ export default function ContactPage() {
           </div>
           <h1
             className="font-display font-light"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)", color: "var(--color-ivory)" }}
+            style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)", color: "var(--color-text-primary)" }}
           >
             Contact
           </h1>
-          <p className="text-sm mt-4 tracking-wider" style={{ color: "rgba(245,240,232,0.5)" }}>
+          <p className="text-sm mt-4 tracking-wider" style={{ color: "var(--color-text-secondary)" }}>
             We respond to all enquiries within 48 hours.
           </p>
         </FadeUp>
@@ -35,13 +35,13 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <StaggerItem>
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(245,240,232,0.45)" }}>
+                  <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "var(--color-text-secondary)" }}>
                     First Name
                   </label>
                   <input
                     type="text"
                     className="bg-transparent py-3 px-4 text-sm outline-none transition-colors duration-300"
-                    style={{ border: "1px solid rgba(201,169,110,0.2)", color: "var(--color-ivory)" }}
+                    style={{ border: "1px solid rgba(201,169,110,0.2)", color: "var(--color-text-primary)" }}
                     onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.6)")}
                     onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.2)")}
                   />
@@ -49,13 +49,13 @@ export default function ContactPage() {
               </StaggerItem>
               <StaggerItem>
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(245,240,232,0.45)" }}>
+                  <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "var(--color-text-secondary)" }}>
                     Last Name
                   </label>
                   <input
                     type="text"
                     className="bg-transparent py-3 px-4 text-sm outline-none transition-colors duration-300"
-                    style={{ border: "1px solid rgba(201,169,110,0.2)", color: "var(--color-ivory)" }}
+                    style={{ border: "1px solid rgba(201,169,110,0.2)", color: "var(--color-text-primary)" }}
                     onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.6)")}
                     onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.2)")}
                   />
@@ -65,13 +65,13 @@ export default function ContactPage() {
 
             <StaggerItem>
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(245,240,232,0.45)" }}>
+                <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "var(--color-text-secondary)" }}>
                   Email
                 </label>
                 <input
                   type="email"
                   className="bg-transparent py-3 px-4 text-sm outline-none transition-colors duration-300"
-                  style={{ border: "1px solid rgba(201,169,110,0.2)", color: "var(--color-ivory)" }}
+                  style={{ border: "1px solid rgba(201,169,110,0.2)", color: "var(--color-text-primary)" }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.6)")}
                   onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.2)")}
                 />
@@ -80,15 +80,15 @@ export default function ContactPage() {
 
             <StaggerItem>
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(245,240,232,0.45)" }}>
+                <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "var(--color-text-secondary)" }}>
                   Subject
                 </label>
                 <select
                   className="bg-transparent py-3 px-4 text-sm outline-none transition-colors duration-300 cursor-pointer"
                   style={{
                     border: "1px solid rgba(201,169,110,0.2)",
-                    color: "var(--color-ivory)",
-                    backgroundColor: "var(--color-obsidian-soft)",
+                    color: "var(--color-text-primary)",
+                    backgroundColor: "var(--color-cream-soft)",
                   }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.6)")}
                   onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.2)")}
@@ -105,13 +105,13 @@ export default function ContactPage() {
 
             <StaggerItem>
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(245,240,232,0.45)" }}>
+                <label className="text-xs tracking-[0.2em] uppercase" style={{ color: "var(--color-text-secondary)" }}>
                   Message
                 </label>
                 <textarea
                   rows={6}
                   className="bg-transparent py-3 px-4 text-sm outline-none resize-none transition-colors duration-300"
-                  style={{ border: "1px solid rgba(201,169,110,0.2)", color: "var(--color-ivory)" }}
+                  style={{ border: "1px solid rgba(201,169,110,0.2)", color: "var(--color-text-primary)" }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.6)")}
                   onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.2)")}
                 />
@@ -146,8 +146,8 @@ export default function ContactPage() {
             <motion.a
               href="mailto:contact@ateliernuvelle.com"
               className="text-sm tracking-wider"
-              style={{ color: "rgba(245,240,232,0.5)" }}
-              whileHover={{ color: "var(--color-ivory)" }}
+              style={{ color: "var(--color-text-secondary)" }}
+              whileHover={{ color: "var(--color-text-primary)" }}
               transition={{ duration: 0.2 }}
             >
               contact@ateliernuvelle.com

@@ -1,14 +1,26 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-obsidian: #0a0a0a;
-  --color-obsidian-soft: #111111;
-  --color-obsidian-muted: #1a1a1a;
+  /* ── Light luxury palette ────────────────────────────── */
+  --color-cream: #FAF7F2;
+  --color-cream-soft: #F5F0E8;
+  --color-warm-white: #FFFFFF;
+  --color-charcoal: #2C2C2C;
+  --color-charcoal-soft: #4A4A4A;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B6B6B;
+
+  /* Gold accent system */
   --color-gold: #C9A96E;
   --color-gold-light: #E8D5A3;
   --color-gold-dark: #8B6914;
+
+  /* Legacy aliases (for minimal migration breakage) */
   --color-ivory: #F5F0E8;
   --color-ivory-soft: #EDE8DE;
+  --color-obsidian: #FAF7F2;
+  --color-obsidian-soft: #F5F0E8;
+  --color-obsidian-muted: #EFEFEF;
 
   /* Product universes */
   --color-velours: #7B1C3A;
@@ -20,6 +32,8 @@
   --color-epure-light: #C9A030;
   --color-noctis: #D4968A;
   --color-noctis-light: #E8B5AB;
+  --color-sillage: #6B3A1F;
+  --color-sillage-light: #8B4513;
 
   --font-display: var(--font-cormorant);
   --font-body: var(--font-jost);
@@ -51,35 +65,31 @@
   box-sizing: border-box;
 }
 
-@media (pointer: fine) {
-  *, *::before, *::after { cursor: none !important; }
-}
-
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
 
 body {
-  background-color: var(--color-obsidian);
-  color: var(--color-ivory);
+  background-color: var(--color-cream);
+  color: var(--color-text-primary);
   font-family: var(--font-body), sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
   background: var(--color-gold);
-  color: var(--color-obsidian);
+  color: var(--color-warm-white);
 }
 
 ::-webkit-scrollbar {
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-obsidian);
+  background: var(--color-cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-gold-dark);
+  background: var(--color-gold);
   border-radius: 2px;
 }
 
@@ -88,10 +98,10 @@ body {
 }
 
 .text-gold { color: var(--color-gold); }
-.text-ivory { color: var(--color-ivory); }
-.bg-obsidian { background-color: var(--color-obsidian); }
-.bg-obsidian-soft { background-color: var(--color-obsidian-soft); }
-.bg-obsidian-muted { background-color: var(--color-obsidian-muted); }
+.text-ivory { color: var(--color-text-primary); }
+.bg-obsidian { background-color: var(--color-cream); }
+.bg-obsidian-soft { background-color: var(--color-cream-soft); }
+.bg-obsidian-muted { background-color: var(--color-warm-white); }
 .border-gold { border-color: var(--color-gold); }
 .border-gold\/20 { border-color: color-mix(in srgb, var(--color-gold) 20%, transparent); }
 .border-gold\/30 { border-color: color-mix(in srgb, var(--color-gold) 30%, transparent); }

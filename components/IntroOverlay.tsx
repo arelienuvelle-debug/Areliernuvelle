@@ -34,7 +34,7 @@ export default function IntroOverlay() {
               <motion.span
                 key={i}
                 className="font-display font-light"
-                style={{ fontSize: "clamp(2.2rem, 7vw, 5.5rem)", color: "var(--color-ivory)" }}
+                style={{ fontSize: "clamp(2.2rem, 7vw, 5.5rem)", color: "var(--color-text-primary)" }}
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.08 + i * 0.055, ease: [0.25, 0.1, 0.25, 1] }}

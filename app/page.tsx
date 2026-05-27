@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import { FadeUp, FadeIn, StaggerContainer, StaggerItem } from "@/components/MotionPrimitives";
 import NewsletterSection from "@/components/NewsletterSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
 export default function HomePage() {
   const heroRef = useRef<HTMLElement>(null);
@@ -16,7 +18,6 @@ export default function HomePage() {
     offset: ["start start", "end start"],
   });
 
-  const glowY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.65], ["0%", "8%"]);
 
@@ -26,19 +27,35 @@ export default function HomePage() {
       <section
         ref={heroRef}
         className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden"
-        style={{ background: "linear-gradient(160deg, #0a0a0a 0%, #0f0f0f 50%, #111008 100%)" }}
       >
-        {/* Parallax glow */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,169,110,0.07) 0%, transparent 70%)",
-            y: glowY,
-          }}
-        />
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/hero-bg.png"
+            alt="Atelier Nuvellé Luxury Perfume"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-80"
+          />
+          {/* Subtle gold and soft cream overlay */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(250,247,242,0.45) 0%, rgba(250,247,242,0.1) 50%, rgba(250,247,242,0.75) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse 70% 55% at 50% 40%, rgba(201,169,110,0.06) 0%, transparent 75%)",
+            }}
+          />
+        </div>
 
-        {/* Hero content — fades + drifts up on scroll */}
+        {/* Hero content */}
         <motion.div
           className="flex flex-col items-center"
           style={{ opacity: contentOpacity, y: contentY }}
@@ -46,7 +63,7 @@ export default function HomePage() {
           <div className="flex items-center gap-4 mb-10">
             <motion.div
               className="h-px"
-              style={{ backgroundColor: "rgba(201,169,110,0.4)" }}
+              style={{ backgroundColor: "rgba(201,169,110,0.5)" }}
               initial={{ width: 0 }}
               animate={{ width: 64 }}
               transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -62,7 +79,7 @@ export default function HomePage() {
             </motion.span>
             <motion.div
               className="h-px"
-              style={{ backgroundColor: "rgba(201,169,110,0.4)" }}
+              style={{ backgroundColor: "rgba(201,169,110,0.5)" }}
               initial={{ width: 0 }}
               animate={{ width: 64 }}
               transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -74,7 +91,7 @@ export default function HomePage() {
               className="font-display font-light leading-none"
               style={{
                 fontSize: "clamp(3.5rem, 10vw, 9rem)",
-                color: "var(--color-ivory)",
+                color: "var(--color-text-primary)",
                 letterSpacing: "-0.02em",
               }}
               initial={{ y: "100%", opacity: 0 }}
@@ -103,14 +120,12 @@ export default function HomePage() {
 
           <motion.p
             className="max-w-md text-sm leading-relaxed tracking-wider mb-12"
-            style={{ color: "rgba(245,240,232,0.55)" }}
+            style={{ color: "var(--color-text-secondary)" }}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.9 }}
           >
-            Rare compositions for rare individuals.
-            <br />
-            Each fragrance, a world unto itself.
+            The art of fragrance. Rare compositions for rare individuals.
           </motion.p>
 
           <motion.div
@@ -120,8 +135,8 @@ export default function HomePage() {
           >
             <Link
               href="/collection"
-              className="inline-flex items-center gap-4 px-10 py-4 text-xs tracking-[0.35em] uppercase transition-all duration-500 hover:bg-[var(--color-gold)] hover:text-[var(--color-obsidian)]"
-              style={{ border: "1px solid rgba(201,169,110,0.5)", color: "var(--color-gold)" }}
+              className="inline-flex items-center gap-4 px-10 py-4 text-xs tracking-[0.35em] uppercase transition-all duration-500 hover:bg-[var(--color-gold)] hover:text-white"
+              style={{ border: "1px solid rgba(201,169,110,0.6)", color: "var(--color-gold-dark)" }}
             >
               Discover the Collection
               <span>→</span>
@@ -129,28 +144,28 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
 
-        {/* Animated scroll indicator */}
+        {/* Scroll indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
           <motion.div
             className="w-px h-12"
-            style={{ background: "linear-gradient(to bottom, rgba(201,169,110,0.6), transparent)" }}
+            style={{ background: "linear-gradient(to bottom, rgba(201,169,110,0.7), transparent)" }}
             animate={{ opacity: [0.3, 1, 0.3], y: [0, 6, 0] }}
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
       </section>
 
-      {/* ── Featured products ────────────────────────────────────── */}
+      {/* ── Bestsellers ──────────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-6 py-28">
         <FadeUp className="text-center mb-16">
           <p className="text-xs tracking-[0.4em] uppercase mb-3" style={{ color: "var(--color-gold)" }}>
-            The Collection
+            Bestsellers
           </p>
           <h2
             className="font-display font-light"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--color-ivory)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--color-text-primary)" }}
           >
-            Five Worlds of Scent
+            Timeless favourites
           </h2>
         </FadeUp>
 
@@ -173,51 +188,56 @@ export default function HomePage() {
         </FadeIn>
       </section>
 
-      {/* ── Fragrance Finder CTA ─────────────────────────────────── */}
-      <FadeIn className="py-24 px-6 text-center">
-        <div
-          className="max-w-2xl mx-auto py-16 px-10 border relative overflow-hidden"
-          style={{ borderColor: "rgba(201,169,110,0.15)", backgroundColor: "var(--color-obsidian-soft)" }}
+      {/* ── 20% Off Campaign Banner ───────────────────────────────── */}
+      <FadeIn>
+        <section
+          className="py-24 px-6 text-center relative overflow-hidden"
+          style={{ backgroundColor: "var(--color-charcoal)" }}
         >
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              backgroundImage: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,169,110,0.04) 0%, transparent 70%)",
+              backgroundImage: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,169,110,0.08) 0%, transparent 70%)",
             }}
           />
-          <p className="text-xs tracking-[0.4em] uppercase mb-4" style={{ color: "var(--color-gold)" }}>
-            Personalised Discovery
-          </p>
-          <h2
-            className="font-display font-light mb-5"
-            style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", color: "var(--color-ivory)" }}
-          >
-            Not sure where to begin?
-          </h2>
-          <p className="text-sm tracking-wider mb-8 max-w-sm mx-auto" style={{ color: "rgba(245,240,232,0.45)" }}>
-            Answer four questions and we will find the fragrance that was made for you.
-          </p>
-          <Link
-            href="/fragrance-finder"
-            className="inline-flex items-center gap-4 px-10 py-4 text-xs tracking-[0.3em] uppercase transition-all duration-400 hover:bg-[var(--color-gold)] hover:text-[var(--color-obsidian)]"
-            style={{ border: "1px solid rgba(201,169,110,0.4)", color: "var(--color-gold)" }}
-          >
-            Find Your Scent
-            <span>→</span>
-          </Link>
-        </div>
+          <div className="relative max-w-2xl mx-auto">
+            <p className="text-xs tracking-[0.4em] uppercase mb-4" style={{ color: "var(--color-gold)" }}>
+              Launch Offer
+            </p>
+            <h2
+              className="font-display font-light mb-6"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--color-ivory)" }}
+            >
+              20% Off — The Collection
+            </h2>
+            <p className="text-sm tracking-wider mb-10" style={{ color: "rgba(245,240,232,0.55)" }}>
+              Every fragrance. Every bottle. Limited time.
+            </p>
+            <Link
+              href="/collection"
+              className="inline-flex items-center gap-4 px-10 py-4 text-xs tracking-[0.35em] uppercase transition-all duration-500 hover:bg-[var(--color-gold)] hover:text-[var(--color-charcoal)]"
+              style={{ border: "1px solid rgba(201,169,110,0.5)", color: "var(--color-gold)" }}
+            >
+              Shop Now
+              <span>→</span>
+            </Link>
+          </div>
+        </section>
       </FadeIn>
 
-      {/* ── Brand story teaser ───────────────────────────────────── */}
+      {/* ── Testimonials ─────────────────────────────────────────── */}
+      <TestimonialsSection />
+
+      {/* ── Brand story ──────────────────────────────────────────── */}
       <section
         className="py-28 px-6"
         style={{
-          backgroundColor: "var(--color-obsidian-soft)",
-          borderTop: "1px solid rgba(201,169,110,0.08)",
-          borderBottom: "1px solid rgba(201,169,110,0.08)",
+          backgroundColor: "var(--color-cream-soft)",
+          borderTop: "1px solid rgba(201,169,110,0.1)",
+          borderBottom: "1px solid rgba(201,169,110,0.1)",
         }}
       >
-        <FadeUp className="max-w-3xl mx-auto text-center">
+        <FadeUp className="max-w-2xl mx-auto text-center">
           <div className="flex items-center gap-4 justify-center mb-10">
             <div className="w-12 h-px" style={{ backgroundColor: "rgba(201,169,110,0.4)" }} />
             <span className="text-xs tracking-[0.4em] uppercase" style={{ color: "var(--color-gold)" }}>
@@ -227,8 +247,8 @@ export default function HomePage() {
           </div>
 
           <h2
-            className="font-display font-light mb-8 leading-snug"
-            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--color-ivory)" }}
+            className="font-display font-light mb-6 leading-snug"
+            style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", color: "var(--color-text-primary)" }}
           >
             Born from a love of
             <br />
@@ -237,12 +257,10 @@ export default function HomePage() {
 
           <p
             className="text-sm leading-loose tracking-wide mb-10"
-            style={{ color: "rgba(245,240,232,0.55)" }}
+            style={{ color: "var(--color-text-secondary)" }}
           >
-            Atelier Nuvellé was founded on a singular belief — that perfume is not merely worn,
-            it is inhabited. Each composition in our collection is an invitation to step into
-            a world crafted with rare ingredients, artisan expertise, and an uncompromising
-            pursuit of beauty.
+            Perfume is not merely worn — it is inhabited. Each composition is crafted with
+            rare ingredients and an uncompromising pursuit of beauty.
           </p>
 
           <Link
@@ -257,20 +275,6 @@ export default function HomePage() {
 
       {/* ── Newsletter ───────────────────────────────────────────── */}
       <NewsletterSection />
-
-      {/* ── Signature quote ──────────────────────────────────────── */}
-      <FadeIn className="py-28 px-6 text-center">
-        <p
-          className="font-display font-light italic"
-          style={{
-            fontSize: "clamp(1.2rem, 3vw, 2rem)",
-            color: "rgba(201,169,110,0.6)",
-            letterSpacing: "0.05em",
-          }}
-        >
-          &ldquo;Wear it like a second soul.&rdquo;
-        </p>
-      </FadeIn>
     </>
   );
 }

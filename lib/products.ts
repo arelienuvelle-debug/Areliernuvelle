@@ -29,7 +29,7 @@ export const products: Product[] = [
   {
     id: "velours",
     name: "VELOURS",
-    tagline: "The warmth of crimson silk.",
+    tagline: "Deep. Sensuous. Unforgettable.",
     story:
       "Velours wraps you in the opulence of a Parisian evening — deep, sensuous, and unapologetically present. A bold extrait that commands attention without effort.",
     type: "Extrait de Parfum",
@@ -48,10 +48,10 @@ export const products: Product[] = [
     colorLight: "#A02550",
     textColor: "#F5F0E8",
     images: [
-      "/products/velours-1.jpg",
+      "/products/velours-1.png",
       "/products/velours-2.jpg",
       "/products/velours-3.jpg",
-    ], // studio + lifestyle + candle/roses
+    ],
     slug: "velours",
     rating: 4.8,
     reviewCount: 124,
@@ -60,7 +60,7 @@ export const products: Product[] = [
   {
     id: "lueur",
     name: "LUEUR",
-    tagline: "Light breaking through cold air.",
+    tagline: "Crisp. Luminous. Electric.",
     story:
       "Lueur is the clarity of an alpine morning — crisp, luminous, and electric. A contemplative extrait for those who find beauty in stillness.",
     type: "Extrait de Parfum",
@@ -79,8 +79,8 @@ export const products: Product[] = [
     colorLight: "#2A4580",
     textColor: "#F5F0E8",
     images: [
-      "/products/lueur-1.jpg",
-      "/products/lueur-2.jpg",
+      "/products/lueur-1.png",
+      "/products/lueur-2.png",
     ],
     slug: "lueur",
     rating: 4.7,
@@ -90,10 +90,10 @@ export const products: Product[] = [
   {
     id: "epure",
     name: "ÉPURE",
-    tagline: "Refined to its purest essence.",
+    tagline: "Pure. Golden. Essential.",
     story:
       "Épure is the art of restraint — a golden composition stripped of excess, leaving only what is essential and beautiful. Understated luxury at its finest.",
-    type: "Eau de Parfum",
+    type: "Extrait de Parfum",
     size: "80 ML · 2.7 FL.OZ",
     price: 5600,
     priceDisplay: "£56.00",
@@ -109,7 +109,7 @@ export const products: Product[] = [
     colorLight: "#C9A030",
     textColor: "#0a0a0a",
     images: [
-      "/products/epure-1.jpg",
+      "/products/epure-1.png",
       "/products/epure-2.jpg",
     ],
     slug: "epure",
@@ -120,7 +120,7 @@ export const products: Product[] = [
   {
     id: "noctis",
     name: "NOCTIS",
-    tagline: "A night of roses and secrets.",
+    tagline: "Delicate. Blush. Eternal.",
     story:
       "Noctis is a blush dream — delicate yet unforgettable. Its baroque crown bottle encases a scent born from the quietest hours, tender and eternally feminine.",
     type: "Extrait de Parfum",
@@ -139,7 +139,7 @@ export const products: Product[] = [
     colorLight: "#E8B5AB",
     textColor: "#0a0a0a",
     images: [
-      "/products/noctis-1.jpg",
+      "/products/noctis-1.png",
       "/products/noctis-2.jpg",
     ],
     slug: "noctis",
@@ -150,7 +150,7 @@ export const products: Product[] = [
   {
     id: "sillage",
     name: "SILLAGE",
-    tagline: "The invisible trail you leave behind.",
+    tagline: "Warm. Resinous. Lasting.",
     story:
       "Sillage is the art of presence — the warm, resinous trail that lingers long after you have left the room. A deeply opulent oriental extrait, built for those who move through the world leaving an impression that cannot be forgotten.",
     type: "Extrait de Parfum",
@@ -169,7 +169,7 @@ export const products: Product[] = [
     colorLight: "#8B4513",
     textColor: "#E8D5A3",
     images: [
-      "/products/sillage-1.jpg",
+      "/products/sillage-1.png",
       "/products/sillage-2.jpg",
     ],
     slug: "sillage",

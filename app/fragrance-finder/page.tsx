@@ -85,7 +85,7 @@ function OptionCard({
     <motion.button
       onClick={onSelect}
       className="text-left p-6 border cursor-pointer w-full"
-      style={{ borderColor: "rgba(201,169,110,0.18)", backgroundColor: "var(--color-obsidian-soft)" }}
+      style={{ borderColor: "rgba(201,169,110,0.18)", backgroundColor: "var(--color-cream-soft)" }}
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.42, delay: 0.1 + index * 0.07, ease: [0.25, 0.1, 0.25, 1] }}
@@ -96,10 +96,10 @@ function OptionCard({
       }}
       whileTap={{ scale: 0.985 }}
     >
-      <p className="font-display text-xl tracking-wide mb-1.5" style={{ color: "var(--color-ivory)" }}>
+      <p className="font-display text-xl tracking-wide mb-1.5" style={{ color: "var(--color-text-primary)" }}>
         {label}
       </p>
-      <p className="text-xs tracking-wide leading-relaxed" style={{ color: "rgba(245,240,232,0.45)" }}>
+      <p className="text-xs tracking-wide leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
         {sublabel}
       </p>
     </motion.button>
@@ -138,7 +138,7 @@ export default function FragranceFinderPage() {
   return (
     <div
       className="min-h-screen pt-24 pb-28 px-6"
-      style={{ background: "linear-gradient(160deg, #0a0a0a 0%, #0f0f0f 60%, #0a0a08 100%)" }}
+      style={{ background: "linear-gradient(160deg, #FAF7F2 0%, #F5F0E8 60%, #FAF7F2 100%)" }}
     >
       <div className="max-w-2xl mx-auto">
 
@@ -164,13 +164,13 @@ export default function FragranceFinderPage() {
 
               <h1
                 className="font-display font-light mb-6"
-                style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", color: "var(--color-ivory)", letterSpacing: "-0.01em" }}
+                style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", color: "var(--color-text-primary)", letterSpacing: "-0.01em" }}
               >
                 Find Your<br />
                 <em style={{ color: "var(--color-gold)" }}>Fragrance</em>
               </h1>
 
-              <p className="text-sm leading-loose tracking-wider max-w-sm mb-12" style={{ color: "rgba(245,240,232,0.5)" }}>
+              <p className="text-sm leading-loose tracking-wider max-w-sm mb-12" style={{ color: "var(--color-text-secondary)" }}>
                 Four questions. One fragrance made for you.
                 Answer instinctively — the right scent already knows you.
               </p>
@@ -178,7 +178,7 @@ export default function FragranceFinderPage() {
               <motion.button
                 onClick={() => setPhase("quiz")}
                 className="px-12 py-4 text-xs tracking-[0.35em] uppercase cursor-pointer"
-                style={{ backgroundColor: "var(--color-gold)", color: "var(--color-obsidian)" }}
+                style={{ backgroundColor: "var(--color-gold)", color: "var(--color-charcoal)" }}
                 whileHover={{ opacity: 0.88 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
@@ -186,7 +186,7 @@ export default function FragranceFinderPage() {
                 Begin
               </motion.button>
 
-              <p className="text-xs tracking-wider mt-6" style={{ color: "rgba(245,240,232,0.25)" }}>
+              <p className="text-xs tracking-wider mt-6" style={{ color: "var(--color-text-secondary)", opacity: 0.6 }}>
                 4 questions · takes under a minute
               </p>
             </motion.div>
@@ -225,7 +225,7 @@ export default function FragranceFinderPage() {
                 </p>
                 <h2
                   className="font-display font-light"
-                  style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)", color: "var(--color-ivory)" }}
+                  style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)", color: "var(--color-text-primary)" }}
                 >
                   {question.prompt}
                 </h2>
@@ -303,16 +303,16 @@ export default function FragranceFinderPage() {
               >
                 <h2
                   className="font-display font-light mb-2"
-                  style={{ fontSize: "clamp(2rem, 6vw, 3.5rem)", color: "var(--color-ivory)" }}
+                  style={{ fontSize: "clamp(2rem, 6vw, 3.5rem)", color: "var(--color-text-primary)" }}
                 >
                   {result.name}
                 </h2>
-                <p className="font-display italic text-lg mb-2" style={{ color: "rgba(245,240,232,0.55)" }}>
+                <p className="font-display italic text-lg mb-2" style={{ color: "var(--color-text-secondary)" }}>
                   {result.tagline}
                 </p>
-                <p className="text-xs tracking-widest mb-1" style={{ color: "rgba(201,169,110,0.6)" }}>
+                <p className="text-xs tracking-widest mb-1" style={{ color: "var(--color-gold)" }}>
                   {result.priceDisplay}
-                  <span className="ml-3 line-through" style={{ color: "rgba(245,240,232,0.25)" }}>
+                  <span className="ml-3 line-through" style={{ color: "rgba(26,26,26,0.35)" }}>
                     {result.originalPriceDisplay}
                   </span>
                 </p>
@@ -329,7 +329,7 @@ export default function FragranceFinderPage() {
                   <span
                     key={note}
                     className="text-[10px] tracking-[0.2em] uppercase px-3 py-1 border"
-                    style={{ borderColor: "rgba(201,169,110,0.2)", color: "rgba(245,240,232,0.5)" }}
+                    style={{ borderColor: "rgba(201,169,110,0.2)", color: "var(--color-text-secondary)" }}
                   >
                     {note}
                   </span>
@@ -346,7 +346,7 @@ export default function FragranceFinderPage() {
                 <motion.button
                   onClick={() => addToCart(result)}
                   className="flex-1 py-4 text-xs tracking-[0.3em] uppercase cursor-pointer"
-                  style={{ backgroundColor: "var(--color-gold)", color: "var(--color-obsidian)" }}
+                  style={{ backgroundColor: "var(--color-gold)", color: "var(--color-charcoal)" }}
                   whileHover={{ opacity: 0.88 }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 18 }}
@@ -366,8 +366,8 @@ export default function FragranceFinderPage() {
               <motion.button
                 onClick={restart}
                 className="mt-10 text-xs tracking-[0.25em] uppercase cursor-pointer"
-                style={{ color: "rgba(245,240,232,0.3)" }}
-                whileHover={{ color: "rgba(245,240,232,0.6)" }}
+                style={{ color: "var(--color-text-secondary)", opacity: 0.65 }}
+                whileHover={{ color: "var(--color-text-primary)" }}
                 transition={{ duration: 0.2 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

@@ -48,7 +48,7 @@ export default function SearchOverlay() {
           {/* Backdrop */}
           <motion.div
             className="fixed inset-0 z-[90]"
-            style={{ backgroundColor: "rgba(10,10,10,0.92)", backdropFilter: "blur(10px)" }}
+            style={{ backgroundColor: "rgba(44,44,44,0.45)", backdropFilter: "blur(10px)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -63,6 +63,7 @@ export default function SearchOverlay() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.38, ease: [0.25, 0.1, 0.25, 1] }}
+            style={{ backgroundColor: "var(--color-cream)" }}
           >
             <div
               className="max-w-3xl mx-auto px-6 pt-8 pb-12"
@@ -83,13 +84,13 @@ export default function SearchOverlay() {
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search by name, note, or mood…"
                     className="flex-1 bg-transparent text-base outline-none tracking-wide"
-                    style={{ color: "var(--color-ivory)" }}
+                    style={{ color: "var(--color-text-primary)" }}
                   />
                   {query && (
                     <button
                       onClick={() => setQuery("")}
                       className="text-xs tracking-wider cursor-pointer"
-                      style={{ color: "rgba(245,240,232,0.35)" }}
+                      style={{ color: "var(--color-text-secondary)" }}
                     >
                       Clear
                     </button>
@@ -98,7 +99,7 @@ export default function SearchOverlay() {
                 <motion.button
                   onClick={close}
                   className="p-1.5 cursor-pointer"
-                  style={{ color: "rgba(245,240,232,0.45)" }}
+                  style={{ color: "var(--color-charcoal-soft)" }}
                   whileHover={{ color: "var(--color-gold)" }}
                   transition={{ duration: 0.15 }}
                   aria-label="Close search"
@@ -140,11 +141,11 @@ export default function SearchOverlay() {
                           <div className="flex-1 min-w-0">
                             <p
                               className="font-display text-lg tracking-[0.15em] transition-colors duration-200 group-hover:text-[var(--color-gold)]"
-                              style={{ color: "var(--color-ivory)" }}
+                              style={{ color: "var(--color-text-primary)" }}
                             >
                               {product.name}
                             </p>
-                            <p className="text-xs tracking-wider mt-0.5 truncate" style={{ color: "rgba(245,240,232,0.4)" }}>
+                            <p className="text-xs tracking-wider mt-0.5 truncate" style={{ color: "var(--color-text-secondary)" }}>
                               {product.tagline}
                             </p>
                             {/* Matching notes */}
@@ -163,7 +164,7 @@ export default function SearchOverlay() {
                             <p className="font-display text-base" style={{ color: "var(--color-gold)" }}>
                               {product.priceDisplay}
                             </p>
-                            <p className="text-[10px] tracking-wider mt-0.5" style={{ color: "rgba(245,240,232,0.25)" }}>
+                            <p className="text-[10px] tracking-wider mt-0.5" style={{ color: "var(--color-text-secondary)" }}>
                               {product.type}
                             </p>
                           </div>
@@ -192,7 +193,7 @@ export default function SearchOverlay() {
                     <p className="font-display italic text-xl mb-2" style={{ color: "rgba(201,169,110,0.4)" }}>
                       No fragrances found.
                     </p>
-                    <p className="text-xs tracking-wider" style={{ color: "rgba(245,240,232,0.3)" }}>
+                    <p className="text-xs tracking-wider" style={{ color: "rgba(26,26,26,0.4)" }}>
                       Try searching by a note — rose, oud, sandalwood…
                     </p>
                   </motion.div>
@@ -200,8 +201,8 @@ export default function SearchOverlay() {
               </AnimatePresence>
 
               {/* Hint */}
-              <p className="text-xs tracking-wider mt-10 text-center" style={{ color: "rgba(245,240,232,0.2)" }}>
-                Press <span style={{ color: "rgba(245,240,232,0.4)" }}>ESC</span> to close
+              <p className="text-xs tracking-wider mt-10 text-center" style={{ color: "rgba(26,26,26,0.3)" }}>
+                Press <span style={{ color: "var(--color-text-secondary)" }}>ESC</span> to close
               </p>
             </div>
           </motion.div>

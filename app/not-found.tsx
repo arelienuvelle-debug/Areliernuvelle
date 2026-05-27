@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center px-6 text-center"
-      style={{ background: "linear-gradient(160deg, #0a0a0a 0%, #0f0f0f 50%, #111008 100%)" }}
+      style={{ background: "linear-gradient(160deg, #FAF7F2 0%, #F5F0E8 50%, #FAF7F2 100%)" }}
     >
       {/* Glow */}
       <div
@@ -46,7 +46,7 @@ export default function NotFound() {
       <div className="overflow-hidden mb-4">
         <motion.h1
           className="font-display font-light"
-          style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", color: "var(--color-ivory)" }}
+          style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", color: "var(--color-text-primary)" }}
           initial={{ y: "100%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
           transition={{ duration: 0.75, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -57,7 +57,7 @@ export default function NotFound() {
 
       <motion.p
         className="text-sm tracking-wider max-w-sm mb-12"
-        style={{ color: "rgba(245,240,232,0.4)" }}
+        style={{ color: "var(--color-text-secondary)" }}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.55 }}
@@ -73,15 +73,15 @@ export default function NotFound() {
       >
         <Link
           href="/collection"
-          className="inline-flex items-center gap-3 px-8 py-3.5 text-xs tracking-[0.3em] uppercase transition-all duration-400 hover:bg-[var(--color-gold)] hover:text-[var(--color-obsidian)]"
-          style={{ border: "1px solid rgba(201,169,110,0.45)", color: "var(--color-gold)" }}
+          className="inline-flex items-center gap-3 px-8 py-3.5 text-xs tracking-[0.3em] uppercase transition-all duration-400 hover:bg-[var(--color-gold)] hover:text-white"
+          style={{ border: "1px solid rgba(201,169,110,0.45)", color: "var(--color-gold-dark)" }}
         >
           Explore the Collection
         </Link>
         <Link
           href="/"
           className="text-xs tracking-[0.25em] uppercase pb-px"
-          style={{ color: "rgba(245,240,232,0.4)", borderBottom: "1px solid rgba(245,240,232,0.15)" }}
+          style={{ color: "var(--color-text-secondary)", borderBottom: "1px solid rgba(26,26,26,0.15)" }}
         >
           Return Home
         </Link>

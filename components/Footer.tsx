@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer
       className="mt-32 border-t"
-      style={{ borderColor: "rgba(201,169,110,0.15)", backgroundColor: "var(--color-obsidian-soft)" }}
+      style={{ borderColor: "rgba(201,169,110,0.2)", backgroundColor: "var(--color-charcoal)" }}
     >
       <div className="max-w-7xl mx-auto px-6 py-16">
         <FadeUp>

@@ -16,7 +16,7 @@ const NAV_LINKS = [
 ];
 
 const textVariants: Variants = {
-  rest: { color: "var(--color-ivory-soft)" },
+  rest: { color: "var(--color-charcoal)" },
   hover: { color: "var(--color-gold)", transition: { duration: 0.2 } },
 };
 
@@ -72,8 +72,8 @@ export default function Navbar() {
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
-        backgroundColor: scrolled ? "rgba(10,10,10,0.95)" : "transparent",
-        borderBottom: scrolled ? "1px solid rgba(201,169,110,0.15)" : "none",
+        backgroundColor: scrolled ? "rgba(250,247,242,0.97)" : "transparent",
+        borderBottom: scrolled ? "1px solid rgba(201,169,110,0.2)" : "none",
         backdropFilter: scrolled ? "blur(12px)" : "none",
       }}
     >
@@ -88,7 +88,7 @@ export default function Navbar() {
           </span>
           <span
             className="font-display text-xs tracking-[0.5em] uppercase"
-            style={{ color: "var(--color-ivory-soft)" }}
+            style={{ color: "var(--color-charcoal)" }}
           >
             Nuvellé
           </span>
@@ -107,7 +107,7 @@ export default function Navbar() {
           <motion.button
             onClick={openSearch}
             className="p-2 cursor-pointer"
-            style={{ color: "var(--color-ivory-soft)" }}
+            style={{ color: "var(--color-charcoal)" }}
             whileHover={{ color: "var(--color-gold)" }}
             transition={{ duration: 0.2 }}
             aria-label="Search"
@@ -119,7 +119,7 @@ export default function Navbar() {
             className="relative p-2"
             whileHover={{ color: "var(--color-gold)" }}
             transition={{ duration: 0.2 }}
-            style={{ color: "var(--color-ivory-soft)" }}
+            style={{ color: "var(--color-charcoal)" }}
           >
             <Link href="/wishlist" aria-label="Wishlist">
               <Heart size={20} strokeWidth={1.5} />
@@ -145,7 +145,7 @@ export default function Navbar() {
           <motion.button
             onClick={openCart}
             className="relative p-2 cursor-pointer"
-            style={{ color: "var(--color-ivory-soft)" }}
+            style={{ color: "var(--color-charcoal)" }}
             whileHover={{ color: "var(--color-gold)" }}
             transition={{ duration: 0.2 }}
             aria-label="Open cart"
@@ -171,7 +171,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <motion.button
             className="md:hidden p-2 cursor-pointer"
-            style={{ color: "var(--color-ivory-soft)" }}
+            style={{ color: "var(--color-charcoal)" }}
             onClick={() => setMenuOpen((v) => !v)}
             whileHover={{ color: "var(--color-gold)" }}
             transition={{ duration: 0.2 }}
@@ -204,8 +204,8 @@ export default function Navbar() {
             transition={{ duration: 0.38, ease: [0.25, 0.1, 0.25, 1] }}
             className="overflow-hidden md:hidden"
             style={{
-              backgroundColor: "rgba(10,10,10,0.97)",
-              borderTop: "1px solid rgba(201,169,110,0.15)",
+              backgroundColor: "rgba(250,247,242,0.99)",
+              borderTop: "1px solid rgba(201,169,110,0.2)",
             }}
           >
             <div className="px-6 pb-8 pt-4 flex flex-col gap-6">
@@ -219,7 +219,7 @@ export default function Navbar() {
                   <Link
                     href={href}
                     className="font-display text-xl tracking-[0.15em]"
-                    style={{ color: "var(--color-ivory)" }}
+                    style={{ color: "var(--color-charcoal)" }}
                   >
                     {label}
                   </Link>

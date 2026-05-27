@@ -46,7 +46,7 @@ export default function CheckoutPage() {
         transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <ShoppingBag size={48} strokeWidth={1} style={{ color: "rgba(201,169,110,0.3)" }} />
-        <p className="font-display text-2xl" style={{ color: "rgba(245,240,232,0.5)" }}>
+        <p className="font-display text-2xl" style={{ color: "var(--color-text-secondary)" }}>
           Your selection is empty
         </p>
         <Link
@@ -75,7 +75,7 @@ export default function CheckoutPage() {
           </div>
           <h1
             className="font-display font-light"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--color-ivory)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--color-text-primary)" }}
           >
             Your Selection
           </h1>
@@ -104,22 +104,22 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex flex-col justify-between py-1 flex-1">
                     <div>
-                      <p className="font-display text-xl tracking-widest" style={{ color: "var(--color-ivory)" }}>
+                      <p className="font-display text-xl tracking-widest" style={{ color: "var(--color-text-primary)" }}>
                         {product.name}
                       </p>
-                      <p className="text-xs tracking-wide mt-1" style={{ color: "rgba(245,240,232,0.4)" }}>
+                      <p className="text-xs tracking-wide mt-1" style={{ color: "var(--color-text-secondary)" }}>
                         {product.type} · {product.size}
                       </p>
                     </div>
                     <div className="flex items-center justify-between">
-                      <p className="text-xs tracking-wider" style={{ color: "rgba(245,240,232,0.45)" }}>
+                      <p className="text-xs tracking-wider" style={{ color: "var(--color-text-secondary)" }}>
                         Qty: {quantity}
                       </p>
                       <div className="flex items-baseline gap-2">
                         <p className="font-display text-base" style={{ color: "var(--color-gold)" }}>
                           {formatPrice(product.price * quantity)}
                         </p>
-                        <p className="text-xs line-through" style={{ color: "rgba(245,240,232,0.25)" }}>
+                        <p className="text-xs line-through" style={{ color: "rgba(26,26,26,0.35)" }}>
                           {formatPrice(product.originalPrice * quantity)}
                         </p>
                       </div>
@@ -134,7 +134,7 @@ export default function CheckoutPage() {
           <FadeIn delay={0.15}>
             <div
               className="h-fit border p-8 flex flex-col gap-6"
-              style={{ borderColor: "rgba(201,169,110,0.15)", backgroundColor: "var(--color-obsidian-soft)" }}
+              style={{ borderColor: "rgba(201,169,110,0.15)", backgroundColor: "var(--color-cream-soft)" }}
             >
               <p className="text-xs tracking-[0.3em] uppercase" style={{ color: "var(--color-gold)" }}>
                 Order Summary
@@ -142,20 +142,20 @@ export default function CheckoutPage() {
 
               <div className="flex flex-col gap-4">
                 <div className="flex justify-between text-sm">
-                  <span style={{ color: "rgba(245,240,232,0.5)" }}>
+                  <span style={{ color: "var(--color-text-secondary)" }}>
                     {totalItems} {totalItems === 1 ? "item" : "items"}
                   </span>
-                  <span style={{ color: "var(--color-ivory)" }}>{formatPrice(subtotal)}</span>
+                  <span style={{ color: "var(--color-text-primary)" }}>{formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span style={{ color: "rgba(245,240,232,0.5)" }}>UK Delivery</span>
+                  <span style={{ color: "var(--color-text-secondary)" }}>UK Delivery</span>
                   <span style={{ color: "var(--color-gold)" }}>Free</span>
                 </div>
                 <div
                   className="flex justify-between pt-4 border-t"
                   style={{ borderColor: "rgba(201,169,110,0.15)" }}
                 >
-                  <span className="font-display text-lg" style={{ color: "var(--color-ivory)" }}>Total</span>
+                  <span className="font-display text-lg" style={{ color: "var(--color-text-primary)" }}>Total</span>
                   <span className="font-display text-xl" style={{ color: "var(--color-gold)" }}>
                     {formatPrice(subtotal)}
                   </span>
@@ -176,7 +176,7 @@ export default function CheckoutPage() {
                 onClick={handleCheckout}
                 disabled={loading}
                 className="w-full py-4 text-xs tracking-[0.3em] uppercase cursor-pointer disabled:opacity-50 overflow-hidden"
-                style={{ backgroundColor: "var(--color-gold)", color: "var(--color-obsidian)" }}
+                style={{ backgroundColor: "var(--color-gold)", color: "var(--color-charcoal)" }}
                 whileHover={!loading ? { opacity: 0.88 } : {}}
                 whileTap={!loading ? { scale: 0.97 } : {}}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
@@ -209,10 +209,10 @@ export default function CheckoutPage() {
               </motion.button>
 
               <div className="flex flex-col gap-2 text-center">
-                <p className="text-xs tracking-wider" style={{ color: "rgba(245,240,232,0.3)" }}>
+                <p className="text-xs tracking-wider" style={{ color: "rgba(26,26,26,0.4)" }}>
                   Secured by Stripe · SSL encrypted
                 </p>
-                <p className="text-xs tracking-wider" style={{ color: "rgba(245,240,232,0.3)" }}>
+                <p className="text-xs tracking-wider" style={{ color: "rgba(26,26,26,0.4)" }}>
                   30-day returns · Discreet packaging
                 </p>
               </div>

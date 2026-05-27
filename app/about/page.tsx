@@ -53,7 +53,7 @@ export default function AboutPage() {
           </div>
           <h1
             className="font-display font-light"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", color: "var(--color-ivory)" }}
+            style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", color: "var(--color-text-primary)" }}
           >
             La Maison
           </h1>
@@ -85,7 +85,7 @@ export default function AboutPage() {
                     {title}
                   </h2>
                 </div>
-                <p className="text-base leading-loose" style={{ color: "rgba(245,240,232,0.65)" }}>
+                <p className="text-base leading-loose" style={{ color: "var(--color-text-secondary)" }}>
                   {body}
                 </p>
               </div>
@@ -95,7 +95,7 @@ export default function AboutPage() {
 
         {/* Closing */}
         <FadeIn delay={0.1} className="text-center mt-24">
-          <p className="font-display font-light italic text-xl" style={{ color: "rgba(245,240,232,0.4)" }}>
+          <p className="font-display font-light italic text-xl" style={{ color: "var(--color-text-secondary)" }}>
             London · United Kingdom
           </p>
         </FadeIn>

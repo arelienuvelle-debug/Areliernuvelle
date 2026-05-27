@@ -46,7 +46,7 @@ function StarRating({ rating, reviewCount, slug }: { rating: number; reviewCount
       <span className="font-display text-base" style={{ color: "var(--color-gold)" }}>
         {rating.toFixed(1)}
       </span>
-      <span className="text-xs tracking-wider" style={{ color: "rgba(245,240,232,0.35)" }}>
+      <span className="text-xs tracking-wider" style={{ color: "rgba(26,26,26,0.45)" }}>
         ({reviewCount} reviews)
       </span>
     </div>
@@ -93,7 +93,7 @@ function ProductVisual({ product }: { product: Product }) {
           rotateY: springRotY,
           transformStyle: "preserve-3d",
           perspective: 1000,
-          background: `linear-gradient(160deg, ${product.colorLight}22 0%, ${product.color}44 100%)`,
+          backgroundColor: "var(--color-cream-soft)",
         }}
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
@@ -116,8 +116,8 @@ function ProductVisual({ product }: { product: Product }) {
               alt={`${product.name} — view ${activeIdx + 1}`}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-              style={{ objectPosition: "center top" }}
+              className="object-contain"
+              style={{ padding: "24px" }}
               priority
             />
           </motion.div>
@@ -130,17 +130,17 @@ function ProductVisual({ product }: { product: Product }) {
             background: useTransform(
               [shineX, shineY],
               ([sx, sy]) =>
-                `radial-gradient(ellipse 55% 45% at ${sx} ${sy}, rgba(255,255,255,0.09) 0%, transparent 65%)`
+                `radial-gradient(ellipse 55% 45% at ${sx} ${sy}, rgba(201,169,110,0.06) 0%, transparent 65%)`
             ),
           }}
         />
 
-        {/* Subtle vignette */}
+        {/* Subtle edge vignette */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 55%, rgba(0,0,0,0.28) 100%)",
+              "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 60%, rgba(201,169,110,0.08) 100%)",
           }}
         />
 
@@ -188,8 +188,8 @@ function ProductVisual({ product }: { product: Product }) {
                 alt={`${product.name} view ${i + 1}`}
                 fill
                 sizes="64px"
-                className="object-cover"
-                style={{ objectPosition: "center top" }}
+                className="object-contain"
+                style={{ padding: "6px", backgroundColor: "var(--color-cream-soft)" }}
               />
               {i === activeIdx && (
                 <div
@@ -205,7 +205,7 @@ function ProductVisual({ product }: { product: Product }) {
       {/* Hint */}
       <motion.p
         className="text-[10px] tracking-[0.18em] uppercase text-center"
-        style={{ color: "rgba(245,240,232,0.22)" }}
+        style={{ color: "rgba(26,26,26,0.3)" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
@@ -251,7 +251,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
         <div className="overflow-hidden mb-3">
           <motion.h1
             className="font-display font-light"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)", color: "var(--color-ivory)", letterSpacing: "0.1em" }}
+            style={{ fontSize: "clamp(3rem, 8vw, 7rem)", color: "var(--color-text-primary)", letterSpacing: "0.1em" }}
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: "0%", opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.22, ease: [0.25, 0.1, 0.25, 1] }}
@@ -262,7 +262,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
 
         <motion.p
           className="font-display italic text-lg"
-          style={{ color: "rgba(245,240,232,0.55)" }}
+          style={{ color: "var(--color-text-secondary)" }}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.42 }}
@@ -287,7 +287,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
             <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: "var(--color-gold)" }}>
               The Story
             </p>
-            <p className="font-display text-xl font-light leading-relaxed mb-6" style={{ color: "var(--color-ivory-soft)" }}>
+            <p className="font-display text-xl font-light leading-relaxed mb-6" style={{ color: "var(--color-text-primary)" }}>
               {product.story}
             </p>
             <StarRating rating={product.rating} reviewCount={product.reviewCount} slug={product.slug} />
@@ -297,7 +297,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
           <FadeUp delay={0.08}>
             <div
               className="border p-8 flex flex-col gap-6"
-              style={{ borderColor: "rgba(201,169,110,0.15)", backgroundColor: "var(--color-obsidian-soft)" }}
+              style={{ borderColor: "rgba(201,169,110,0.15)", backgroundColor: "var(--color-cream-soft)" }}
             >
               <p className="text-xs tracking-[0.3em] uppercase" style={{ color: "var(--color-gold)" }}>
                 Scent Pyramid
@@ -308,7 +308,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
                 { label: "Base Notes", notes: product.notes.base },
               ].map(({ label, notes }) => (
                 <div key={label}>
-                  <p className="text-xs tracking-wider uppercase mb-2" style={{ color: "rgba(245,240,232,0.4)" }}>
+                  <p className="text-xs tracking-wider uppercase mb-2" style={{ color: "var(--color-text-secondary)" }}>
                     {label}
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -316,7 +316,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
                       <motion.span
                         key={note}
                         className="text-xs tracking-wider px-3 py-1.5 border inline-block"
-                        style={{ borderColor: "rgba(201,169,110,0.2)", color: "var(--color-ivory-soft)" }}
+                        style={{ borderColor: "rgba(201,169,110,0.2)", color: "var(--color-text-primary)" }}
                         initial={{ opacity: 0, scale: 0.88 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
@@ -341,10 +341,10 @@ export default function ProductPageClient({ product }: { product: Product }) {
                 { label: "Application", value: "Natural Spray" },
               ].map(({ label, value }) => (
                 <div key={label} className="border p-4" style={{ borderColor: "rgba(201,169,110,0.1)" }}>
-                  <p className="text-xs tracking-wider uppercase mb-1" style={{ color: "rgba(245,240,232,0.35)" }}>
+                  <p className="text-xs tracking-wider uppercase mb-1" style={{ color: "rgba(26,26,26,0.45)" }}>
                     {label}
                   </p>
-                  <p className="text-sm tracking-wider" style={{ color: "var(--color-ivory-soft)" }}>
+                  <p className="text-sm tracking-wider" style={{ color: "var(--color-text-primary)" }}>
                     {value}
                   </p>
                 </div>
@@ -359,7 +359,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
                 <p className="font-display text-3xl" style={{ color: "var(--color-gold)" }}>
                   {product.priceDisplay}
                 </p>
-                <p className="font-display text-lg line-through" style={{ color: "rgba(245,240,232,0.3)" }}>
+                <p className="font-display text-lg line-through" style={{ color: "rgba(26,26,26,0.4)" }}>
                   {product.originalPriceDisplay}
                 </p>
                 <span
@@ -369,11 +369,11 @@ export default function ProductPageClient({ product }: { product: Product }) {
                   {product.discount}
                 </span>
               </div>
-              <p className="text-xs tracking-wider" style={{ color: "rgba(245,240,232,0.35)" }}>
+              <p className="text-xs tracking-wider" style={{ color: "rgba(26,26,26,0.45)" }}>
                 incl. VAT · free UK delivery
               </p>
               <AddToCartButton product={product} />
-              <p className="text-xs tracking-wider text-center" style={{ color: "rgba(245,240,232,0.3)" }}>
+              <p className="text-xs tracking-wider text-center" style={{ color: "rgba(26,26,26,0.4)" }}>
                 Secure checkout · 30-day returns · Discreet packaging
               </p>
             </div>
@@ -418,7 +418,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
                   </motion.div>
                   <span
                     className="text-xs tracking-[0.2em] uppercase"
-                    style={{ color: "rgba(245,240,232,0.45)" }}
+                    style={{ color: "var(--color-text-secondary)" }}
                   >
                     {p.name}
                   </span>

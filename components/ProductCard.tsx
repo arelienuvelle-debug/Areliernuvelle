@@ -68,10 +68,8 @@ export default function ProductCard({ product }: { product: Product }) {
         <Link href={`/collection/${product.slug}`} className="block">
           <motion.div
             className="w-full aspect-[3/4] relative overflow-hidden"
-            style={{
-              background: `linear-gradient(160deg, ${product.colorLight} 0%, ${product.color} 100%)`,
-            }}
-            whileHover={{ scale: 1.04 }}
+            style={{ backgroundColor: "var(--color-cream-soft)" }}
+            whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 280, damping: 22 }}
           >
             {/* Product photo */}
@@ -80,57 +78,32 @@ export default function ProductCard({ product }: { product: Product }) {
               alt={product.name}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 22vw"
-              className="object-cover"
-              style={{ objectPosition: "center top" }}
+              className="object-contain"
+              style={{ padding: "12px" }}
             />
 
-            {/* Gradient for text legibility */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 45%, transparent 72%)",
-              }}
-            />
-
-            {/* Name at bottom of image */}
-            <div className="absolute bottom-6 left-0 right-0 text-center z-10 px-3">
-              <p
-                className="font-display text-3xl tracking-[0.2em]"
-                style={{ color: "#F5F0E8" }}
-              >
-                {product.name}
-              </p>
-              <p
-                className="text-xs tracking-[0.2em] uppercase mt-1"
-                style={{ color: "rgba(245,240,232,0.62)" }}
-              >
-                {product.type}
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Hover overlay */}
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center pointer-events-none z-20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: hovered ? 1 : 0 }}
-            transition={{ duration: 0.25 }}
-            style={{ backgroundColor: "rgba(0,0,0,0.38)" }}
-          >
-            <span
-              className="text-xs tracking-[0.3em] uppercase px-6 py-3 border"
-              style={{ color: "var(--color-ivory)", borderColor: "rgba(245,240,232,0.5)" }}
+            {/* Hover overlay */}
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center pointer-events-none z-20"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: hovered ? 1 : 0 }}
+              transition={{ duration: 0.25 }}
+              style={{ backgroundColor: "rgba(250,247,242,0.72)", backdropFilter: "blur(2px)" }}
             >
-              View Details
-            </span>
+              <span
+                className="text-xs tracking-[0.3em] uppercase px-6 py-3 border"
+                style={{ color: "var(--color-charcoal)", borderColor: "rgba(201,169,110,0.6)" }}
+              >
+                View Details
+              </span>
+            </motion.div>
           </motion.div>
         </Link>
 
         {/* Discount badge */}
         <div
           className="absolute top-3 left-3 px-2 py-1 text-[10px] tracking-[0.15em] uppercase font-medium pointer-events-none z-30"
-          style={{ backgroundColor: "var(--color-gold)", color: "var(--color-obsidian)" }}
+          style={{ backgroundColor: "var(--color-gold)", color: "var(--color-charcoal)" }}
         >
           {product.discount}
         </div>
@@ -139,7 +112,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <motion.button
           className="absolute top-2.5 right-2.5 p-1.5 cursor-pointer z-30"
           onClick={() => toggle(product.id)}
-          animate={{ opacity: isWishlisted ? 1 : hovered ? 0.85 : 0.4 }}
+          animate={{ opacity: isWishlisted ? 1 : hovered ? 0.85 : 0.35 }}
           whileHover={{ scale: 1.18 }}
           whileTap={{ scale: 0.88 }}
           transition={{ type: "spring", stiffness: 400, damping: 18 }}
@@ -149,7 +122,7 @@ export default function ProductCard({ product }: { product: Product }) {
             size={16}
             strokeWidth={1.5}
             fill={isWishlisted ? "var(--color-gold)" : "none"}
-            style={{ color: isWishlisted ? "var(--color-gold)" : "var(--color-ivory)" }}
+            style={{ color: isWishlisted ? "var(--color-gold)" : "var(--color-charcoal)" }}
           />
         </motion.button>
       </div>
@@ -157,19 +130,19 @@ export default function ProductCard({ product }: { product: Product }) {
       {/* Info */}
       <div
         className="pt-5 pb-6 px-1 flex flex-col gap-3 border-b"
-        style={{ borderColor: "rgba(201,169,110,0.12)" }}
+        style={{ borderColor: "rgba(201,169,110,0.15)" }}
       >
         <div>
           <Link href={`/collection/${product.slug}`}>
             <p
               className="font-display text-xl tracking-[0.15em]"
-              style={{ color: "var(--color-ivory)" }}
+              style={{ color: "var(--color-text-primary)" }}
             >
               {product.name}
             </p>
           </Link>
-          <p className="text-xs tracking-wider mt-0.5" style={{ color: "rgba(245,240,232,0.45)" }}>
-            {product.tagline}
+          <p className="text-xs tracking-wider mt-0.5" style={{ color: "var(--color-text-secondary)" }}>
+            {product.type}
           </p>
         </div>
 
@@ -178,11 +151,11 @@ export default function ProductCard({ product }: { product: Product }) {
             <p className="font-display text-base" style={{ color: "var(--color-gold)" }}>
               {product.priceDisplay}
             </p>
-            <p className="text-xs line-through" style={{ color: "rgba(245,240,232,0.3)" }}>
+            <p className="text-xs line-through" style={{ color: "rgba(26,26,26,0.35)" }}>
               {product.originalPriceDisplay}
             </p>
           </div>
-          <p className="text-xs tracking-wider" style={{ color: "rgba(245,240,232,0.35)" }}>
+          <p className="text-xs tracking-wider" style={{ color: "rgba(26,26,26,0.4)" }}>
             {product.size}
           </p>
         </div>
@@ -192,7 +165,7 @@ export default function ProductCard({ product }: { product: Product }) {
           className="w-full py-3 text-xs tracking-[0.25em] uppercase mt-1 cursor-pointer overflow-hidden"
           style={{
             border: "1px solid rgba(201,169,110,0.35)",
-            color: added ? "var(--color-obsidian)" : "var(--color-gold)",
+            color: added ? "var(--color-warm-white)" : "var(--color-gold-dark)",
             backgroundColor: added
               ? "var(--color-gold)"
               : hovered

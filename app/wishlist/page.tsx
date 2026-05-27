@@ -26,7 +26,7 @@ export default function WishlistPage() {
           </div>
           <h1
             className="font-display font-light"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", color: "var(--color-ivory)" }}
+            style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", color: "var(--color-text-primary)" }}
           >
             Wishlist
           </h1>
@@ -58,7 +58,7 @@ export default function WishlistPage() {
                 />
               </svg>
             </div>
-            <p className="text-sm tracking-widest" style={{ color: "rgba(245,240,232,0.35)" }}>
+            <p className="text-sm tracking-widest" style={{ color: "var(--color-text-secondary)" }}>
               Your wishlist is empty.
             </p>
             <motion.div whileHover={{ opacity: 0.8 }} transition={{ duration: 0.2 }}>

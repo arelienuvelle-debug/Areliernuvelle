@@ -35,11 +35,11 @@ export default function CollectionPage() {
           </div>
           <h1
             className="font-display font-light mb-4"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", color: "var(--color-ivory)" }}
+            style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", color: "var(--color-text-primary)" }}
           >
             The Collection
           </h1>
-          <p className="text-sm tracking-wider max-w-md mx-auto" style={{ color: "rgba(245,240,232,0.5)" }}>
+          <p className="text-sm tracking-wider max-w-md mx-auto" style={{ color: "var(--color-text-secondary)" }}>
             Five extraordinary compositions. Each one a singular world of scent, crafted without compromise.
           </p>
         </FadeUp>
@@ -49,7 +49,7 @@ export default function CollectionPage() {
 
         {/* Note */}
         <FadeIn delay={0.2} className="mt-20 text-center">
-          <p className="text-xs tracking-wider" style={{ color: "rgba(245,240,232,0.3)" }}>
+          <p className="text-xs tracking-wider" style={{ color: "rgba(26,26,26,0.4)" }}>
             All fragrances are Extrait de Parfum concentration unless stated · Natural spray · Made in France
           </p>
         </FadeIn>

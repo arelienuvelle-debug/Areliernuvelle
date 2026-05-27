@@ -5,12 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 
-type FilterId = "all" | "extrait" | "edp";
+type FilterId = "all" | "extrait";
 
 const FILTERS: { id: FilterId; label: string }[] = [
   { id: "all", label: "All" },
   { id: "extrait", label: "Extrait de Parfum" },
-  { id: "edp", label: "Eau de Parfum" },
 ];
 
 export default function CollectionGrid() {
@@ -19,7 +18,6 @@ export default function CollectionGrid() {
   const filtered = products.filter((p) => {
     if (active === "all") return true;
     if (active === "extrait") return p.type === "Extrait de Parfum";
-    if (active === "edp") return p.type === "Eau de Parfum";
     return true;
   });
 
@@ -41,7 +39,7 @@ export default function CollectionGrid() {
               key={id}
               onClick={() => setActive(id)}
               className="relative px-6 py-3 text-xs tracking-[0.25em] uppercase cursor-pointer transition-colors duration-200"
-              style={{ color: active === id ? "var(--color-obsidian)" : "rgba(245,240,232,0.45)" }}
+              style={{ color: active === id ? "var(--color-charcoal)" : "var(--color-text-secondary)" }}
             >
               {active === id && (
                 <motion.div

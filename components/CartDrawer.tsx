@@ -43,8 +43,8 @@ export default function CartDrawer() {
             key="drawer"
             className="fixed top-0 right-0 h-full z-50 flex flex-col w-full max-w-md"
             style={{
-              backgroundColor: "var(--color-obsidian-soft)",
-              borderLeft: "1px solid rgba(201,169,110,0.15)",
+              backgroundColor: "var(--color-warm-white)",
+              borderLeft: "1px solid rgba(201,169,110,0.2)",
             }}
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -54,7 +54,7 @@ export default function CartDrawer() {
             {/* Header */}
             <motion.div
               className="flex items-center justify-between px-8 py-6 border-b"
-              style={{ borderColor: "rgba(201,169,110,0.15)" }}
+              style={{ borderColor: "rgba(201,169,110,0.2)" }}
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.12, duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
@@ -63,14 +63,14 @@ export default function CartDrawer() {
                 <p className="text-xs tracking-[0.3em] uppercase" style={{ color: "var(--color-gold)" }}>
                   Your Selection
                 </p>
-                <p className="font-display text-xl mt-0.5" style={{ color: "var(--color-ivory)" }}>
+                <p className="font-display text-xl mt-0.5" style={{ color: "var(--color-text-primary)" }}>
                   {totalItems} {totalItems === 1 ? "Item" : "Items"}
                 </p>
               </div>
               <motion.button
                 onClick={closeCart}
                 className="p-2 cursor-pointer"
-                style={{ color: "var(--color-ivory-soft)" }}
+                style={{ color: "var(--color-charcoal-soft)" }}
                 whileHover={{ color: "var(--color-gold)" }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ duration: 0.2 }}
@@ -97,7 +97,7 @@ export default function CartDrawer() {
                     transition={{ duration: 0.25 }}
                   >
                     <ShoppingBag size={40} strokeWidth={1} style={{ color: "rgba(201,169,110,0.3)" }} />
-                    <p className="font-display text-lg" style={{ color: "rgba(245,240,232,0.4)" }}>
+                    <p className="font-display text-lg" style={{ color: "var(--color-text-secondary)" }}>
                       Your selection is empty
                     </p>
                     <button
@@ -143,11 +143,11 @@ export default function CartDrawer() {
                             <div>
                               <p
                                 className="font-display text-lg tracking-widest"
-                                style={{ color: "var(--color-ivory)" }}
+                                style={{ color: "var(--color-text-primary)" }}
                               >
                                 {product.name}
                               </p>
-                              <p className="text-xs tracking-wide mt-0.5" style={{ color: "rgba(245,240,232,0.45)" }}>
+                              <p className="text-xs tracking-wide mt-0.5" style={{ color: "var(--color-text-secondary)" }}>
                                 {product.type} · {product.size}
                               </p>
                             </div>
@@ -160,20 +160,20 @@ export default function CartDrawer() {
                                 <motion.button
                                   onClick={() => updateQuantity(product.id, quantity - 1)}
                                   className="cursor-pointer"
-                                  style={{ color: "var(--color-ivory-soft)" }}
+                                  style={{ color: "var(--color-charcoal-soft)" }}
                                   whileHover={{ color: "var(--color-gold)" }}
                                   whileTap={{ scale: 0.85 }}
                                   transition={{ duration: 0.15 }}
                                 >
                                   <Minus size={12} strokeWidth={1.5} />
                                 </motion.button>
-                                <span className="text-xs w-4 text-center" style={{ color: "var(--color-ivory)" }}>
+                                <span className="text-xs w-4 text-center" style={{ color: "var(--color-text-primary)" }}>
                                   {quantity}
                                 </span>
                                 <motion.button
                                   onClick={() => updateQuantity(product.id, quantity + 1)}
                                   className="cursor-pointer"
-                                  style={{ color: "var(--color-ivory-soft)" }}
+                                  style={{ color: "var(--color-charcoal-soft)" }}
                                   whileHover={{ color: "var(--color-gold)" }}
                                   whileTap={{ scale: 0.85 }}
                                   transition={{ duration: 0.15 }}
@@ -185,7 +185,7 @@ export default function CartDrawer() {
                                 <p className="font-display text-base" style={{ color: "var(--color-gold)" }}>
                                   {formatPrice(product.price * quantity)}
                                 </p>
-                                <p className="text-[10px] line-through" style={{ color: "rgba(245,240,232,0.25)" }}>
+                                <p className="text-[10px] line-through" style={{ color: "rgba(26,26,26,0.3)" }}>
                                   {formatPrice(product.originalPrice * quantity)}
                                 </p>
                               </div>
@@ -195,8 +195,8 @@ export default function CartDrawer() {
                           <motion.button
                             onClick={() => removeFromCart(product.id)}
                             className="self-start mt-0.5 cursor-pointer"
-                            style={{ color: "rgba(245,240,232,0.3)" }}
-                            whileHover={{ color: "var(--color-ivory-soft)" }}
+                            style={{ color: "rgba(26,26,26,0.4)" }}
+                            whileHover={{ color: "var(--color-charcoal-soft)" }}
                             whileTap={{ scale: 0.85 }}
                             transition={{ duration: 0.15 }}
                           >
@@ -216,20 +216,20 @@ export default function CartDrawer() {
                 <motion.div
                   key="footer"
                   className="px-8 py-6 border-t"
-                  style={{ borderColor: "rgba(201,169,110,0.15)" }}
+                  style={{ borderColor: "rgba(201,169,110,0.2)" }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                 >
                   <div className="flex justify-between items-center mb-6">
-                    <p className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(245,240,232,0.5)" }}>
+                    <p className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(26,26,26,0.5)" }}>
                       Subtotal
                     </p>
                     <motion.p
                       key={subtotal}
                       className="font-display text-xl"
-                      style={{ color: "var(--color-ivory)" }}
+                      style={{ color: "var(--color-text-primary)" }}
                       initial={{ opacity: 0, y: -6 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.25 }}

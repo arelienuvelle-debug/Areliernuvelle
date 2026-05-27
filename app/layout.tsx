@@ -10,7 +10,6 @@ import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import IntroOverlay from "@/components/IntroOverlay";
 import PageTransition from "@/components/PageTransition";
-import CustomCursor from "@/components/CustomCursor";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -80,7 +79,7 @@ export default function RootLayout({
 })();
         `.trim() }} />
       </head>
-      <body className="min-h-screen flex flex-col" style={{ backgroundColor: "var(--color-obsidian)", color: "var(--color-ivory)" }}>
+      <body className="min-h-screen flex flex-col" style={{ backgroundColor: "var(--color-cream)", color: "var(--color-text-primary)" }}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -99,7 +98,6 @@ export default function RootLayout({
         <SearchProvider>
         <WishlistProvider>
         <CartProvider>
-          <CustomCursor />
           <IntroOverlay />
           <Navbar />
           <main className="flex-1">
