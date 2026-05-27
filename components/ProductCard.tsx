@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { Product } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
@@ -15,11 +16,14 @@ import {
   AnimatePresence,
 } from "framer-motion";
 
+const ProductModel = dynamic(() => import("@/components/ProductModel"), { ssr: false });
+
 export default function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const { toggle, has } = useWishlist();
   const isWishlisted = has(product.id);
   const [hovered, setHovered] = useState(false);
+  const [modelMounted, setModelMounted] = useState(false);
   const [added, setAdded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -60,7 +64,7 @@ export default function ProductCard({ product }: { product: Product }) {
         perspective: 800,
       }}
       onMouseMove={onMouseMove}
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={() => { setHovered(true); setModelMounted(true); }}
       onMouseLeave={onMouseLeave}
     >
       {/* Photo block */}
@@ -72,31 +76,37 @@ export default function ProductCard({ product }: { product: Product }) {
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 280, damping: 22 }}
           >
-            {/* Product photo */}
-            <Image
-              src={product.images[0]}
-              alt={product.name}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 22vw"
-              className="object-contain"
-              style={{ padding: "12px" }}
-            />
-
-            {/* Hover overlay */}
+            {/* Static product image — fades out on hover */}
             <motion.div
-              className="absolute inset-0 flex items-center justify-center pointer-events-none z-20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: hovered ? 1 : 0 }}
-              transition={{ duration: 0.25 }}
-              style={{ backgroundColor: "rgba(250,247,242,0.72)", backdropFilter: "blur(2px)" }}
+              className="absolute inset-0"
+              animate={{ opacity: hovered ? 0 : 1 }}
+              transition={{ duration: 0.45 }}
             >
-              <span
-                className="text-xs tracking-[0.3em] uppercase px-6 py-3 border"
-                style={{ color: "var(--color-charcoal)", borderColor: "rgba(201,169,110,0.6)" }}
-              >
-                View Details
-              </span>
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 22vw"
+                className="object-contain"
+                style={{ padding: "12px" }}
+              />
             </motion.div>
+
+            {/* 3D model — mounted once on first hover, crossfades in */}
+            {modelMounted && (
+              <motion.div
+                className="absolute inset-0"
+                animate={{ opacity: hovered ? 1 : 0 }}
+                transition={{ duration: 0.45 }}
+              >
+                <ProductModel
+                  url={product.modelUrl}
+                  slug={product.slug}
+                  color={product.color}
+                  colorLight={product.colorLight}
+                />
+              </motion.div>
+            )}
           </motion.div>
         </Link>
 
