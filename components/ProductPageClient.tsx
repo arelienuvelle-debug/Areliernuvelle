@@ -275,7 +275,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
       <div className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
         {/* Left — interactive photo */}
-        <div className="sticky top-28">
+        <div className="lg:sticky lg:top-28">
           <ProductVisual product={product} />
         </div>
 
