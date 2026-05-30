@@ -43,12 +43,9 @@ function buildSlipHTML(orders: Order[]): string {
       <table>
         <thead><tr><th>Item</th><th>Qty</th><th style="text-align:right">Price</th></tr></thead>
         <tbody>
-          ${order.items
-            .map(
-              (item) =>
-                `<tr><td>${item.name}</td><td>${item.quantity}</td><td style="text-align:right">${pence(item.unitAmount * item.quantity)}</td></tr>`
-            )
-            .join("")}
+          ${order.items.map((item) =>
+            `<tr><td>${item.name}</td><td>${item.quantity}</td><td style="text-align:right">${pence(item.unitAmount * item.quantity)}</td></tr>`
+          ).join("")}
         </tbody>
       </table>
       <div class="totals">
@@ -58,8 +55,7 @@ function buildSlipHTML(orders: Order[]): string {
       </div>
       <div class="footer">Thank you for your order.</div>
     </div>`
-    )
-    .join("");
+    ).join("");
 
   return `<!DOCTYPE html><html><head><meta charset="utf-8">
 <title>Packing Slips — Atelier Nuvellé</title>
@@ -98,40 +94,28 @@ function printSlips(orders: Order[]) {
   setTimeout(() => win.print(), 400);
 }
 
-function StatCard({
-  label,
-  value,
-  sub,
-}: {
+function StatCard({ label, value, sub, accent = false }: {
   label: string;
   value: string;
   sub?: string;
+  accent?: boolean;
 }) {
   return (
     <div
-      className="p-6 border"
+      className="p-6 border flex flex-col gap-2"
       style={{
-        borderColor: "rgba(201,169,110,0.15)",
-        backgroundColor: "var(--color-obsidian-soft)",
+        borderColor: accent ? "rgba(201,169,110,0.4)" : "rgba(255,255,255,0.06)",
+        backgroundColor: accent ? "rgba(201,169,110,0.06)" : "#111111",
       }}
     >
-      <p
-        className="text-xs tracking-widest uppercase mb-2"
-        style={{ color: "rgba(245,240,232,0.45)", fontFamily: "var(--font-body)" }}
-      >
+      <p className="text-[10px] tracking-[0.25em] uppercase" style={{ color: "rgba(245,240,232,0.35)" }}>
         {label}
       </p>
-      <p
-        className="text-3xl font-light"
-        style={{ fontFamily: "var(--font-display)", color: "var(--color-ivory)" }}
-      >
+      <p className="font-display text-3xl font-light" style={{ color: accent ? "#C9A96E" : "#F5F0E8" }}>
         {value}
       </p>
       {sub && (
-        <p
-          className="text-xs mt-1"
-          style={{ color: "var(--color-gold)", fontFamily: "var(--font-body)" }}
-        >
+        <p className="text-xs" style={{ color: "#C9A96E" }}>
           {sub}
         </p>
       )}
@@ -139,11 +123,7 @@ function StatCard({
   );
 }
 
-export default function AdminDashboard({
-  initialOrders,
-}: {
-  initialOrders: Order[];
-}) {
+export default function AdminDashboard({ initialOrders }: { initialOrders: Order[] }) {
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>(initialOrders);
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -151,9 +131,7 @@ export default function AdminDashboard({
   const [syncMsg, setSyncMsg] = useState("");
 
   const today = new Date().toDateString();
-  const todayOrders = orders.filter(
-    (o) => new Date(o.createdAt).toDateString() === today
-  );
+  const todayOrders = orders.filter((o) => new Date(o.createdAt).toDateString() === today);
   const totalRevenue = orders.reduce((s, o) => s + o.total, 0);
   const avgOrder = orders.length ? totalRevenue / orders.length : 0;
 
@@ -180,38 +158,30 @@ export default function AdminDashboard({
   }
 
   return (
-    <div
-      className="min-h-screen"
-      style={{ backgroundColor: "var(--color-obsidian)", fontFamily: "var(--font-body)" }}
-    >
+    <div className="min-h-screen" style={{ backgroundColor: "#0A0A0A", color: "#F5F0E8" }}>
+
       {/* Header */}
       <div
-        className="border-b px-8 py-5 flex items-center justify-between"
-        style={{ borderColor: "rgba(201,169,110,0.15)" }}
+        className="border-b px-6 lg:px-10 py-4 flex items-center justify-between"
+        style={{ borderColor: "rgba(255,255,255,0.06)", backgroundColor: "#0F0F0F" }}
       >
-        <div>
-          <p
-            className="text-xs tracking-[0.3em] uppercase"
-            style={{ color: "var(--color-gold)" }}
-          >
-            Atelier Nuvellé
-          </p>
-          <h1
-            className="text-xl font-light mt-0.5"
-            style={{ fontFamily: "var(--font-display)", color: "var(--color-ivory)" }}
-          >
-            Admin Dashboard
-          </h1>
-        </div>
         <div className="flex items-center gap-4">
+          <div>
+            <p className="text-[10px] tracking-[0.35em] uppercase" style={{ color: "#C9A96E" }}>
+              Atelier Nuvellé
+            </p>
+            <h1 className="font-display font-light text-lg tracking-wider" style={{ color: "#F5F0E8" }}>
+              Admin Dashboard
+            </h1>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
           {orders.length > 0 && (
             <button
               onClick={() => printSlips(orders)}
-              className="text-xs tracking-widest uppercase px-4 py-2 border transition-colors"
-              style={{
-                borderColor: "rgba(201,169,110,0.4)",
-                color: "var(--color-gold)",
-              }}
+              className="text-[10px] tracking-[0.2em] uppercase px-4 py-2 border transition-colors cursor-pointer hover:border-[rgba(201,169,110,0.6)]"
+              style={{ borderColor: "rgba(201,169,110,0.3)", color: "#C9A96E" }}
             >
               Print All Slips
             </button>
@@ -219,96 +189,75 @@ export default function AdminDashboard({
           <button
             onClick={handleSync}
             disabled={syncing}
-            className="text-xs tracking-widest uppercase px-4 py-2 border transition-colors"
+            className="text-[10px] tracking-[0.2em] uppercase px-4 py-2 border transition-colors cursor-pointer"
             style={{
-              borderColor: "rgba(201,169,110,0.4)",
-              color: syncing ? "rgba(245,240,232,0.4)" : "var(--color-gold)",
+              borderColor: "rgba(201,169,110,0.3)",
+              color: syncing ? "rgba(201,169,110,0.35)" : "#C9A96E",
             }}
           >
             {syncing ? "Syncing…" : "Sync Stripe"}
           </button>
           <button
             onClick={handleLogout}
-            className="text-xs tracking-widest uppercase px-4 py-2 border transition-colors"
-            style={{
-              borderColor: "rgba(245,240,232,0.15)",
-              color: "rgba(245,240,232,0.5)",
-            }}
+            className="text-[10px] tracking-[0.2em] uppercase px-4 py-2 border transition-colors cursor-pointer hover:border-white/20"
+            style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,240,232,0.4)" }}
           >
             Logout
           </button>
         </div>
       </div>
 
-      <div className="px-8 py-8 max-w-7xl mx-auto">
+      <div className="px-6 lg:px-10 py-8 max-w-screen-xl mx-auto">
+
+        {/* Sync message */}
         {syncMsg && (
-          <p
-            className="text-xs mb-6 px-4 py-2 border"
-            style={{
-              borderColor: "rgba(201,169,110,0.3)",
-              color: "var(--color-gold)",
-              backgroundColor: "rgba(201,169,110,0.06)",
-            }}
+          <div
+            className="mb-6 px-4 py-3 border text-xs tracking-wide"
+            style={{ borderColor: "rgba(201,169,110,0.3)", color: "#C9A96E", backgroundColor: "rgba(201,169,110,0.05)" }}
           >
             {syncMsg}
-          </p>
+          </div>
         )}
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          <StatCard label="Total Revenue" value={pence(totalRevenue)} />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+          <StatCard label="Total Revenue" value={pence(totalRevenue)} accent />
           <StatCard label="Total Orders" value={orders.length.toString()} />
           <StatCard
             label="Today's Orders"
             value={todayOrders.length.toString()}
-            sub={todayOrders.length > 0 ? pence(todayOrders.reduce((s, o) => s + o.total, 0)) : undefined}
+            sub={todayOrders.length > 0 ? pence(todayOrders.reduce((s, o) => s + o.total, 0)) + " today" : undefined}
           />
-          <StatCard
-            label="Avg Order Value"
-            value={orders.length ? pence(avgOrder) : "—"}
-          />
+          <StatCard label="Avg Order Value" value={orders.length ? pence(avgOrder) : "—"} />
         </div>
 
-        {/* Orders table */}
+        {/* Orders */}
         <div>
-          <h2
-            className="text-xs tracking-[0.25em] uppercase mb-4"
-            style={{ color: "rgba(245,240,232,0.45)" }}
-          >
-            Orders ({orders.length})
-          </h2>
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[10px] tracking-[0.3em] uppercase" style={{ color: "rgba(245,240,232,0.3)" }}>
+              Orders — {orders.length} total
+            </p>
+          </div>
 
           {orders.length === 0 ? (
             <div
-              className="border py-16 text-center"
-              style={{ borderColor: "rgba(201,169,110,0.1)" }}
+              className="border py-20 text-center"
+              style={{ borderColor: "rgba(255,255,255,0.06)" }}
             >
-              <p
-                className="text-sm"
-                style={{ color: "rgba(245,240,232,0.35)" }}
-              >
-                No orders yet. Use "Sync Stripe" to import existing payments.
+              <p className="text-sm mb-2" style={{ color: "rgba(245,240,232,0.3)" }}>
+                No orders yet.
               </p>
-              <p
-                className="text-xs mt-2"
-                style={{ color: "rgba(245,240,232,0.2)" }}
-              >
-                New orders will appear automatically once the Stripe webhook is configured.
+              <p className="text-xs" style={{ color: "rgba(245,240,232,0.15)" }}>
+                Click &ldquo;Sync Stripe&rdquo; to import existing payments, or wait for the next purchase.
               </p>
             </div>
           ) : (
-            <div
-              className="border"
-              style={{ borderColor: "rgba(201,169,110,0.15)" }}
-            >
+            <div className="border" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+
               {/* Table header */}
               <div
-                className="grid grid-cols-12 px-5 py-3 text-xs tracking-widest uppercase border-b"
-                style={{
-                  borderColor: "rgba(201,169,110,0.1)",
-                  color: "rgba(245,240,232,0.35)",
-                  backgroundColor: "rgba(255,255,255,0.02)",
-                }}
+                className="hidden lg:grid grid-cols-12 px-5 py-3 text-[10px] tracking-[0.2em] uppercase border-b"
+                style={{ borderColor: "rgba(255,255,255,0.05)", color: "rgba(245,240,232,0.25)", backgroundColor: "#0F0F0F" }}
               >
                 <div className="col-span-3">Customer</div>
                 <div className="col-span-3">Email</div>
@@ -319,62 +268,62 @@ export default function AdminDashboard({
                 <div className="col-span-1 text-center">Status</div>
               </div>
 
-              {orders.map((order) => (
+              {orders.map((order, idx) => (
                 <div key={order.id}>
                   {/* Row */}
                   <div
-                    className="grid grid-cols-12 px-5 py-4 border-b cursor-pointer transition-colors hover:bg-white/[0.02]"
-                    style={{ borderColor: "rgba(201,169,110,0.08)" }}
-                    onClick={() =>
-                      setExpanded(expanded === order.id ? null : order.id)
-                    }
+                    className="grid grid-cols-2 lg:grid-cols-12 px-5 py-4 border-b cursor-pointer transition-colors"
+                    style={{
+                      borderColor: "rgba(255,255,255,0.04)",
+                      backgroundColor: expanded === order.id ? "rgba(201,169,110,0.04)" : "transparent",
+                    }}
+                    onMouseEnter={(e) => { if (expanded !== order.id) (e.currentTarget as HTMLDivElement).style.backgroundColor = "rgba(255,255,255,0.02)"; }}
+                    onMouseLeave={(e) => { if (expanded !== order.id) (e.currentTarget as HTMLDivElement).style.backgroundColor = "transparent"; }}
+                    onClick={() => setExpanded(expanded === order.id ? null : order.id)}
                   >
-                    <div
-                      className="col-span-3 text-sm truncate"
-                      style={{ color: "var(--color-ivory)" }}
-                    >
+                    {/* Mobile: name + total */}
+                    <div className="lg:hidden">
+                      <p className="text-sm" style={{ color: "#F5F0E8" }}>{order.customerName || "—"}</p>
+                      <p className="text-xs mt-0.5" style={{ color: "rgba(245,240,232,0.4)" }}>{formatDate(order.createdAt)}</p>
+                    </div>
+                    <div className="lg:hidden text-right">
+                      <p className="text-sm font-medium" style={{ color: "#C9A96E" }}>{pence(order.total)}</p>
+                      <span
+                        className="text-[10px] px-2 py-0.5 mt-1 inline-block"
+                        style={{
+                          backgroundColor: order.status === "paid" ? "rgba(74,222,128,0.1)" : "rgba(248,113,113,0.1)",
+                          color: order.status === "paid" ? "#4ade80" : "#f87171",
+                        }}
+                      >
+                        {order.status}
+                      </span>
+                    </div>
+
+                    {/* Desktop: full grid */}
+                    <div className="hidden lg:block col-span-3 text-sm truncate" style={{ color: "#F5F0E8" }}>
                       {order.customerName || "—"}
                     </div>
-                    <div
-                      className="col-span-3 text-sm truncate"
-                      style={{ color: "rgba(245,240,232,0.6)" }}
-                    >
+                    <div className="hidden lg:block col-span-3 text-sm truncate" style={{ color: "rgba(245,240,232,0.5)" }}>
                       {order.customerEmail || "—"}
                     </div>
-                    <div
-                      className="col-span-2 text-xs"
-                      style={{ color: "rgba(245,240,232,0.45)" }}
-                    >
+                    <div className="hidden lg:block col-span-2 text-xs self-center" style={{ color: "rgba(245,240,232,0.35)" }}>
                       {formatDate(order.createdAt)}
                     </div>
-                    <div
-                      className="col-span-1 text-sm text-center"
-                      style={{ color: "var(--color-ivory)" }}
-                    >
+                    <div className="hidden lg:flex col-span-1 justify-center items-center text-sm" style={{ color: "#F5F0E8" }}>
                       {order.items.reduce((s, i) => s + i.quantity, 0)}
                     </div>
-                    <div
-                      className="col-span-1 text-xs truncate"
-                      style={{ color: "rgba(245,240,232,0.45)" }}
-                    >
+                    <div className="hidden lg:block col-span-1 text-xs self-center truncate" style={{ color: "rgba(245,240,232,0.35)" }}>
                       {order.shippingMethod}
                     </div>
-                    <div
-                      className="col-span-1 text-sm text-right font-medium"
-                      style={{ color: "var(--color-gold)" }}
-                    >
+                    <div className="hidden lg:block col-span-1 text-sm text-right self-center font-medium" style={{ color: "#C9A96E" }}>
                       {pence(order.total)}
                     </div>
-                    <div className="col-span-1 flex justify-center">
+                    <div className="hidden lg:flex col-span-1 justify-center items-center">
                       <span
-                        className="text-xs px-2 py-0.5"
+                        className="text-[10px] px-2 py-0.5 tracking-wide"
                         style={{
-                          backgroundColor:
-                            order.status === "paid"
-                              ? "rgba(74,222,128,0.1)"
-                              : "rgba(248,113,113,0.1)",
-                          color:
-                            order.status === "paid" ? "#4ade80" : "#f87171",
+                          backgroundColor: order.status === "paid" ? "rgba(74,222,128,0.1)" : "rgba(248,113,113,0.1)",
+                          color: order.status === "paid" ? "#4ade80" : "#f87171",
                         }}
                       >
                         {order.status}
@@ -382,142 +331,79 @@ export default function AdminDashboard({
                     </div>
                   </div>
 
-                  {/* Expanded row */}
+                  {/* Expanded */}
                   {expanded === order.id && (
                     <div
-                      className="px-5 py-5 border-b"
-                      style={{
-                        borderColor: "rgba(201,169,110,0.08)",
-                        backgroundColor: "rgba(201,169,110,0.03)",
-                      }}
+                      className="px-5 py-6 border-b"
+                      style={{ borderColor: "rgba(255,255,255,0.04)", backgroundColor: "rgba(201,169,110,0.03)" }}
                     >
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Cart items */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                        {/* Items */}
                         <div>
-                          <p
-                            className="text-xs tracking-widest uppercase mb-3"
-                            style={{ color: "rgba(245,240,232,0.35)" }}
-                          >
+                          <p className="text-[10px] tracking-[0.25em] uppercase mb-4" style={{ color: "rgba(245,240,232,0.3)" }}>
                             Cart Items
                           </p>
-                          <div className="space-y-2">
+                          <div className="space-y-3">
                             {order.items.map((item, i) => (
-                              <div
-                                key={i}
-                                className="flex justify-between text-sm"
-                              >
-                                <span style={{ color: "var(--color-ivory)" }}>
+                              <div key={i} className="flex justify-between items-center text-sm">
+                                <span style={{ color: "#F5F0E8" }}>
                                   {item.name}
                                   {item.quantity > 1 && (
-                                    <span
-                                      className="ml-2 text-xs"
-                                      style={{ color: "rgba(245,240,232,0.45)" }}
-                                    >
+                                    <span className="ml-2 text-xs" style={{ color: "rgba(245,240,232,0.35)" }}>
                                       × {item.quantity}
                                     </span>
                                   )}
                                 </span>
-                                <span style={{ color: "var(--color-gold)" }}>
-                                  {pence(item.unitAmount * item.quantity)}
-                                </span>
+                                <span style={{ color: "#C9A96E" }}>{pence(item.unitAmount * item.quantity)}</span>
                               </div>
                             ))}
                           </div>
-                          <div
-                            className="border-t mt-3 pt-3 space-y-1"
-                            style={{ borderColor: "rgba(201,169,110,0.1)" }}
-                          >
+                          <div className="border-t mt-4 pt-4 space-y-2" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
                             <div className="flex justify-between text-xs">
-                              <span style={{ color: "rgba(245,240,232,0.45)" }}>
-                                Subtotal
-                              </span>
-                              <span style={{ color: "rgba(245,240,232,0.7)" }}>
-                                {pence(order.subtotal)}
-                              </span>
+                              <span style={{ color: "rgba(245,240,232,0.35)" }}>Subtotal</span>
+                              <span style={{ color: "rgba(245,240,232,0.6)" }}>{pence(order.subtotal)}</span>
                             </div>
                             <div className="flex justify-between text-xs">
-                              <span style={{ color: "rgba(245,240,232,0.45)" }}>
-                                Shipping ({order.shippingMethod})
-                              </span>
-                              <span style={{ color: "rgba(245,240,232,0.7)" }}>
-                                {order.shippingAmount === 0
-                                  ? "Free"
-                                  : pence(order.shippingAmount)}
+                              <span style={{ color: "rgba(245,240,232,0.35)" }}>Shipping ({order.shippingMethod})</span>
+                              <span style={{ color: "rgba(245,240,232,0.6)" }}>
+                                {order.shippingAmount === 0 ? "Free" : pence(order.shippingAmount)}
                               </span>
                             </div>
-                            <div className="flex justify-between text-sm font-medium">
-                              <span style={{ color: "var(--color-ivory)" }}>
-                                Total
-                              </span>
-                              <span style={{ color: "var(--color-gold)" }}>
-                                {pence(order.total)}
-                              </span>
+                            <div className="flex justify-between text-sm font-medium pt-1 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                              <span style={{ color: "#F5F0E8" }}>Total</span>
+                              <span style={{ color: "#C9A96E" }}>{pence(order.total)}</span>
                             </div>
                           </div>
                         </div>
 
-                        {/* Customer / shipping */}
+                        {/* Shipping + actions */}
                         <div>
-                          <p
-                            className="text-xs tracking-widest uppercase mb-3"
-                            style={{ color: "rgba(245,240,232,0.35)" }}
-                          >
-                            Shipping Address
+                          <p className="text-[10px] tracking-[0.25em] uppercase mb-4" style={{ color: "rgba(245,240,232,0.3)" }}>
+                            Ship To
                           </p>
-                          <div
-                            className="text-sm space-y-1"
-                            style={{ color: "rgba(245,240,232,0.7)" }}
+                          <div className="text-sm space-y-1 mb-6">
+                            <p style={{ color: "#F5F0E8" }}>{order.customerName}</p>
+                            <p style={{ color: "rgba(245,240,232,0.55)" }}>{order.address}</p>
+                            <p style={{ color: "rgba(245,240,232,0.55)" }}>{order.city} {order.postalCode}</p>
+                            <p style={{ color: "rgba(245,240,232,0.55)" }}>{order.country}</p>
+                            <p className="pt-1" style={{ color: "rgba(245,240,232,0.4)" }}>{order.customerEmail}</p>
+                          </div>
+                          <p className="text-[10px] tracking-[0.2em] uppercase mb-1" style={{ color: "rgba(245,240,232,0.25)" }}>
+                            Stripe Ref
+                          </p>
+                          <p className="text-xs font-mono mb-6" style={{ color: "rgba(245,240,232,0.2)" }}>
+                            {order.id.slice(-16).toUpperCase()}
+                          </p>
+                          <button
+                            onClick={() => printSlips([order])}
+                            className="text-[10px] tracking-[0.2em] uppercase px-5 py-2.5 border transition-colors cursor-pointer hover:border-[rgba(201,169,110,0.6)]"
+                            style={{ borderColor: "rgba(201,169,110,0.3)", color: "#C9A96E" }}
                           >
-                            <p style={{ color: "var(--color-ivory)" }}>
-                              {order.customerName}
-                            </p>
-                            <p>{order.address}</p>
-                            <p>
-                              {order.city} {order.postalCode}
-                            </p>
-                            <p>{order.country}</p>
-                          </div>
-                          <div className="mt-4">
-                            <p
-                              className="text-xs tracking-widest uppercase mb-1"
-                              style={{ color: "rgba(245,240,232,0.35)" }}
-                            >
-                              Contact
-                            </p>
-                            <p
-                              className="text-sm"
-                              style={{ color: "rgba(245,240,232,0.7)" }}
-                            >
-                              {order.customerEmail}
-                            </p>
-                          </div>
-                          <div className="mt-4">
-                            <p
-                              className="text-xs tracking-widest uppercase mb-1"
-                              style={{ color: "rgba(245,240,232,0.35)" }}
-                            >
-                              Stripe Session
-                            </p>
-                            <p
-                              className="text-xs font-mono break-all"
-                              style={{ color: "rgba(245,240,232,0.3)" }}
-                            >
-                              {order.id}
-                            </p>
-                          </div>
-                          <div className="mt-6">
-                            <button
-                              onClick={() => printSlips([order])}
-                              className="text-xs tracking-widest uppercase px-4 py-2 border transition-colors"
-                              style={{
-                                borderColor: "rgba(201,169,110,0.4)",
-                                color: "var(--color-gold)",
-                              }}
-                            >
-                              Print Packing Slip
-                            </button>
-                          </div>
+                            Print Packing Slip
+                          </button>
                         </div>
+
                       </div>
                     </div>
                   )}
